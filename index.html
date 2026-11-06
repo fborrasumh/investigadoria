@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herramientas de IA para la investigación · Formación ISABIAL</title>
+<meta name="description" content="Portal del curso «Herramientas de IA para la investigación» (Formación ISABIAL): doce apps de IA en cinco sesiones (evidencia, financiación, datos y publicación), guía de la clave de API y normas de uso.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #f7f7f5; --surface: #fff; --border: #e4e3df; --border-strong: #cccbc6;
+  --text: #1a1916; --muted: #7a7872; --accent: #1a4fd8;
+  --s2: #1a4fd8; --s3: #126649; --s4: #6429a8; --s5: #c2186b;
+}
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+a { color: var(--accent); }
+
+/* HEADER */
+header { background: #1a1916; color: #fff; padding: 56px 24px 48px; text-align: center; position: relative; }
+.lang-toggle { position: absolute; top: 16px; right: 16px; display: inline-flex; border: 1px solid #3a3934; border-radius: 99px; overflow: hidden; }
+.lang-toggle button { background: transparent; color: #888; border: 0; font: 600 12px/1 'Inter', sans-serif; letter-spacing: .06em; padding: 7px 11px; cursor: pointer; }
+.lang-toggle button.active { background: #fff; color: #1a1916; }
+.org { display: inline-block; margin-bottom: 28px; background: #fff; border-radius: 12px; padding: 12px 18px; }
+.org img { height: 72px; width: auto; display: block; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #777; margin-bottom: 14px; }
+h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 4.6vw, 3.1rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; margin: 0 auto 14px; max-width: 820px; }
+h1 span { color: #6b8fff; }
+.sub { font-size: 1rem; color: #aaa; max-width: 600px; margin: 0 auto 30px; }
+.stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.stat-n { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; }
+.stat-l { font-size: .75rem; color: #777; text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+
+/* NAV */
+nav { position: sticky; top: 0; z-index: 5; background: rgba(247,247,245,.94); backdrop-filter: blur(6px); border-bottom: .5px solid var(--border); }
+nav .in { max-width: 1060px; margin: 0 auto; padding: 10px 24px; display: flex; gap: 6px; flex-wrap: wrap; }
+nav a { font-size: 13px; color: var(--muted); text-decoration: none; padding: 5px 12px; border-radius: 99px; border: .5px solid transparent; }
+nav a:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface); }
+
+/* MAIN */
+main { max-width: 1060px; margin: 0 auto; padding: 40px 24px 80px; }
+section { margin-bottom: 56px; scroll-margin-top: 64px; }
+h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+.lead { color: var(--muted); margin-bottom: 22px; max-width: 760px; }
+
+/* APP CARDS, AGRUPADAS POR SESIÓN */
+.sgroup { margin-bottom: 28px; }
+.sgroup h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; color: var(--c); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; border-top: 4px solid var(--c); }
+.card-h { display: flex; align-items: center; gap: 12px; }
+.icon-box { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; background: var(--c); flex-shrink: 0; }
+.card h4 { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 800; }
+.card p { font-size: 14px; color: #444; }
+.card .chk { font-size: 13px; color: #555; background: #faf9f7; border-radius: 8px; padding: 10px 12px; }
+.card .chk b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 3px; }
+.card .foot { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; padding-top: 6px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 600 13px 'Inter', sans-serif; padding: 7px 14px; border-radius: 99px; text-decoration: none; background: var(--c); color: #fff; }
+.shared { margin-top: 4px; font-size: 14px; color: #555; background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+
+/* SESSIONS */
+.sessions { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; overflow: hidden; }
+.srow { display: grid; grid-template-columns: 56px 1fr 1fr; gap: 16px; padding: 16px 18px; border-bottom: .5px solid var(--border); align-items: start; font-size: 14px; }
+.srow:last-child { border-bottom: 0; }
+.srow.head { background: #faf9f7; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding: 10px 18px; }
+.snum { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--c, var(--text)); }
+.stit { font-weight: 600; }
+.sapp { font-size: 12px; color: var(--muted); }
+
+/* STEPS / RULES */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.box { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 20px 22px; }
+.box h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
+ol, ul { padding-left: 20px; font-size: 14px; color: #444; }
+li { margin-bottom: 7px; }
+.prov { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.prov a { font-size: 13px; text-decoration: none; border: .5px solid var(--border-strong); border-radius: 99px; padding: 5px 12px; color: var(--text); background: #faf9f7; }
+.prov a:hover { border-color: var(--accent); }
+
+/* FOOTER */
+footer { background: var(--surface); border-top: .5px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--muted); }
+footer p + p { margin-top: 6px; }
+footer a { text-decoration: none; }
+
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 720px) {
+  .srow { grid-template-columns: 40px 1fr; }
+  .srow .hide-sm { display: none; }
+  .lang-toggle { top: 10px; right: 10px; }
+  .lang-toggle button { padding: 6px 8px; }
+  header { padding-top: 64px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="lang-toggle" role="group" aria-label="Idioma / Language / Idioma" id="langs"></div>
+  <a class="org" href="https://www.isabial.es/" target="_blank" rel="noopener">
+    <img src="assets/logo-isabial.png" alt="ISABIAL · Instituto de Investigación Sanitaria y Biomédica de Alicante">
+  </a>
+  <p class="eyebrow" data-i18n="eyebrow"></p>
+  <h1 data-i18n-html="h1"></h1>
+  <p class="sub" data-i18n="sub"></p>
+  <div class="stats">
+    <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stApps"></div></div>
+    <div><div class="stat-n">5</div><div class="stat-l" data-i18n="stSes"></div></div>
+    <div><div class="stat-n">10 h</div><div class="stat-l" data-i18n="stHours"></div></div>
+    <div><div class="stat-n">3</div><div class="stat-l" data-i18n="stLangs"></div></div>
+  </div>
+</header>
+
+<nav><div class="in">
+  <a href="#apps" data-i18n="navApps"></a>
+  <a href="#curso" data-i18n="navCourse"></a>
+  <a href="#clave" data-i18n="navKey"></a>
+  <a href="#normas" data-i18n="navRules"></a>
+</div></nav>
+
+<main>
+  <section id="apps">
+    <h2 data-i18n="appsH"></h2>
+    <p class="lead" data-i18n="appsLead"></p>
+    <div id="groups"></div>
+    <p class="shared" data-i18n="shared"></p>
+  </section>
+
+  <section id="curso">
+    <h2 data-i18n="courseH"></h2>
+    <p class="lead" data-i18n="courseLead"></p>
+    <div class="sessions" id="sessions"></div>
+  </section>
+
+  <section id="clave">
+    <h2 data-i18n="keyH"></h2>
+    <p class="lead" data-i18n="keyLead"></p>
+    <div class="cols">
+      <div class="box">
+        <h3><i class="ti ti-key"></i> <span data-i18n="keyStepsH"></span></h3>
+        <ol id="keySteps"></ol>
+        <div class="prov">
+          <a href="https://platform.openai.com/" target="_blank" rel="noopener">OpenAI</a>
+          <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google Gemini</a>
+          <a href="https://console.anthropic.com/" target="_blank" rel="noopener">Anthropic Claude</a>
+        </div>
+      </div>
+      <div class="box">
+        <h3><i class="ti ti-scale"></i> <span data-i18n="keyChooseH"></span></h3>
+        <ul id="keyChoose"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="normas">
+    <h2 data-i18n="rulesH"></h2>
+    <p class="lead" data-i18n="rulesLead"></p>
+    <div class="cols">
+      <div class="box">
+        <h3><i class="ti ti-shield-lock"></i> <span data-i18n="privH"></span></h3>
+        <ul id="priv"></ul>
+      </div>
+      <div class="box">
+        <h3><i class="ti ti-checklist"></i> <span data-i18n="ethH"></span></h3>
+        <ul id="eth"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p data-i18n="footOrg"></p>
+  <p><span data-i18n="footDev"></span> Fernando Borrás Rocher · <a href="https://orcid.org/0000-0002-5519-4573" target="_blank" rel="noopener">ORCID 0000-0002-5519-4573</a> · <a href="https://github.com/fborrasumh/isabial" target="_blank" rel="noopener">GitHub</a> · <span data-i18n="footLic"></span></p>
+</footer>
+
+<script>
+/* APPS DEL CURSO: cada ficha enlaza a https://fborrasumh.github.io/<id>/ */
+const APPS = [
+  { id:"publication_radar", name:"Publication Radar", ses:2, icon:"ti-radar" },
+  { id:"doctoralia",        name:"Doctoralia",        ses:2, icon:"ti-books" },
+  { id:"prismia",           name:"PRISMIA",           ses:2, icon:"ti-filter" },
+  { id:"fronteria",         name:"FronterIA",         ses:3, icon:"ti-bulb" },
+  { id:"grantwriter",       name:"GrantWriter",       ses:3, icon:"ti-file-text" },
+  { id:"subvencia",         name:"SubvencIA",         ses:3, icon:"ti-file-certificate" },
+  { id:"cuadernia",         name:"CuadernIA",         ses:4, icon:"ti-notebook" },
+  { id:"narrativia",        name:"NarrativIA",        ses:4, icon:"ti-align-left" },
+  { id:"refinia",           name:"RefinIA",           ses:4, icon:"ti-zoom-check" },
+  { id:"revistafit",        name:"RevistaFit",        ses:5, icon:"ti-target" },
+  { id:"adaptia",           name:"AdaptIA",           ses:5, icon:"ti-adjustments" },
+  { id:"arbitria",          name:"ArbitrIA",          ses:5, icon:"ti-gavel" }
+];
+const SES_COLOR = { 1:"--text", 2:"--s2", 3:"--s3", 4:"--s4", 5:"--s5" };
+const LANGS = ["es","en","pt"];
+
+const T = {
+es:{
+  eyebrow:"Curso · Formación ISABIAL",
+  h1:"Herramientas de IA para <span>la investigación</span>",
+  sub:"Doce apps web de un solo archivo, con tu propia clave de IA, para buscar la evidencia, financiar el proyecto, analizar los datos y publicar.",
+  stApps:"apps", stSes:"sesiones", stHours:"de formación", stLangs:"idiomas",
+  navApps:"Apps", navCourse:"Curso", navKey:"Clave de IA", navRules:"Normas de uso",
+  appsH:"Las doce apps",
+  appsLead:"Cada app funciona en el navegador, sin instalación ni servidor. Funcionan con OpenAI, Google Gemini o Anthropic Claude. La IA propone y el código comprueba.",
+  checks:"Qué se comprueba", open:"Abrir app", session:"Sesión",
+  shared:"Cada participante trabaja sobre su propio proyecto y cada sesión parte de lo producido en la anterior: el estado del arte de la sesión 2 sostiene la memoria de la sesión 3, y el cuaderno ejecutado de CuadernIA es la entrada de NarrativIA.",
+  apps:{
+    publication_radar:{ what:"Escribe tu tema y descubre en qué revistas se publica de verdad; elige las que quieres seguir y consulta sus artículos nuevos, con DOI y exportación a Zotero.", chk:"Todos los artículos proceden de OpenAlex y PubMed: la IA nunca genera referencias. Cada revista lleva como prueba su número de artículos sobre el tema." },
+    doctoralia:{ what:"Revisión del estado del arte a partir de seis bases científicas, con diagrama PRISMA y bibliografía lista para el manuscrito o la memoria.", chk:"Cada cita queda anclada a un artículo real y se verifica en el navegador; la auditoría de citas señala las que no se sostienen." },
+    prismia:{ what:"Revisión sistemática con tres modelos de proveedores distintos: dos criban a ciegas por título y resumen y por texto completo, y un tercero arbitra solo los desacuerdos. Busca en PubMed y OpenAlex o importa RIS y CSV.", chk:"El código calcula el kappa y el diagrama PRISMA, comprueba que cada cita de la extracción aparece en el texto y calcula el juicio global de riesgo de sesgo (RoB 2, ROBINS-I, QUADAS-2, Newcastle-Ottawa)." },
+    fronteria:{ what:"De tu pregunta a una propuesta de investigación: los agentes buscan las limitaciones del estado del arte, proponen ideas, diseñan el estudio y lo someten a un revisor simulado. Se descarga en Word.", chk:"La novedad de cada idea se contrasta con las publicaciones más parecidas de OpenAlex; el código elige la más novedosa de las aprobadas; las referencias no encontradas se marcan con ⚠ y no entran en la bibliografía." },
+    grantwriter:{ what:"Memoria de proyecto para convocatorias de I+D+i (AEI, CDTI, Horizonte Europa, IVACE y más): nueve agentes buscan bibliografía, plantean la estrategia según los criterios de evaluación y redactan cada sección.", chk:"Las referencias salen de seis bases científicas; se marcan las citas que no existen y las cifras que no aparecen en lo que aportaste; lo que falta queda como [COMPLETAR]." },
+    subvencia:{ what:"Sube la convocatoria y el proyecto; extrae la rúbrica de evaluación, puntúa el proyecto y lo mejora en ciclos hasta acercarlo al máximo.", chk:"Cada criterio lleva su cita de las bases; la puntuación total la suma el código con los pesos de la convocatoria; un cambio solo se conserva si sube la puntuación; nada inventado (marcas [COMPLETAR])." },
+    cuadernia:{ what:"A partir de un CSV o Excel y la descripción del estudio, propone un plan de análisis editable y genera un cuaderno Jupyter con análisis descriptivo, inferencial y modelización (pandas, scipy, statsmodels).", chk:"Las variables se perfilan por código en el navegador y el plan de análisis se revisa antes de escribir el código." },
+    narrativia:{ what:"Convierte el cuaderno ya ejecutado en la sección de Resultados: inventaría tablas, figuras y contrastes en su orden de ejecución y redacta la prosa científica.", chk:"Las tablas se construyen con los valores exactos del cuaderno y cada cifra del texto se audita contra sus salidas; los números sin respaldo se señalan." },
+    refinia:{ what:"Revisa el manuscrito pasaje a pasaje con varias lentes en paralelo (datos, método y estadística, consistencia interna, referencias y argumentación) y contrasta las secciones entre sí.", chk:"Cada comentario queda anclado a su cita exacta en el texto, con severidad y sugerencia de corrección; los hallazgos que no se sostienen se filtran." },
+    revistafit:{ what:"Busca en OpenAlex dónde se publica la literatura parecida a tu manuscrito, ordena las revistas según tus prioridades (ajuste temático, impacto, acceso abierto, coste) y redacta la carta de presentación.", chk:"Cada recomendación se justifica con los artículos concretos de OpenAlex publicados en esa revista." },
+    adaptia:{ what:"Extrae de las normas para autores un perfil editorial, compara el manuscrito y propone solo los cambios necesarios con un diff que aceptas o rechazas.", chk:"Cada regla del perfil lleva su cita de las normas; un auditor marca por código las cifras nuevas, las afirmaciones más categóricas y las citas alteradas." },
+    arbitria:{ what:"Simula la revisión completa de una revista internacional: cinco revisores con roles distintos y una síntesis editorial con decisión y hoja de ruta para la revisión.", chk:"Los revisores trabajan sin ver los informes de los demás; cada hallazgo lleva su ancla de evidencia y su severidad, sin puntuación numérica." }
+  },
+  courseH:"El curso",
+  courseLead:"Cinco sesiones de 2 horas que siguen el ciclo de un proyecto: evidencia, financiación, datos y publicación. Desde la segunda sesión se trabajan tres apps sobre el proyecto de cada participante (unos 30 minutos por app) y se sale con un entregable real.",
+  thSes:"Sesión", thOut:"Entregable",
+  sessions:[
+    { t:"Proveedores, modelos y tu clave de IA", a:"Presentación y guía de la clave", o:"Clave configurada con límite de gasto, modelo elegido y ficha del proyecto (pregunta, campo y datos disponibles)." },
+    { t:"Buscar y sintetizar la evidencia", a:"Publication Radar · Doctoralia · PRISMIA", o:"Radar de revistas del área, estado del arte con citas verificadas y cribado de prueba con su diagrama PRISMA." },
+    { t:"Financiación de proyectos", a:"FronterIA · GrantWriter · SubvencIA", o:"Propuesta con la novedad contrastada y memoria de una convocatoria real, puntuada con su rúbrica y con el informe de ciclos." },
+    { t:"Del dato al manuscrito", a:"CuadernIA · NarrativIA · RefinIA", o:"Cuaderno ejecutado, sección de Resultados con las cifras auditadas e informe de verificación del manuscrito." },
+    { t:"Del manuscrito a la revista", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Revista elegida con su carta de presentación, manuscrito adaptado a sus normas, simulacro de revisión con hoja de ruta y presentación final ante el grupo." }
+  ],
+  keyH:"Tu clave de IA",
+  keyLead:"Las apps usan la API del proveedor con tu propia clave. La clave se guarda solo en tu navegador y nunca pasa por un servidor del curso.",
+  keyStepsH:"Crear la clave con límite de gasto",
+  keySteps:[
+    "Crea una cuenta en la plataforma de desarrolladores del proveedor (en el curso, platform.openai.com).",
+    "Añade un método de pago y fija un límite de gasto mensual bajo antes de crear la clave.",
+    "Crea una clave de API, cópiala y guárdala en un lugar seguro: no se vuelve a mostrar.",
+    "Pégala en la app, carga la lista de modelos disponibles para tu clave y elige uno económico.",
+    "PRISMIA pide un proveedor distinto para cada revisor; si solo tienes la clave de OpenAI, sigue la sesión con su ejemplo, que no necesita clave.",
+    "Si la clave se expone, revócala en la plataforma y crea otra."
+  ],
+  keyChooseH:"Cómo elegir modelo",
+  keyChoose:[
+    "Capacidad: los modelos grandes razonan mejor; los pequeños bastan para redactar y resumir.",
+    "Coste: se paga por tokens (precio por millón); una memoria completa de GrantWriter cuesta céntimos.",
+    "Ventana de contexto: cuánto texto cabe en una petición; 1.000 tokens equivalen a unas 5 o 6 páginas.",
+    "Privacidad: el uso por API no se emplea para entrenar por defecto, pero los datos de salud son categoría especial del RGPD y no deben enviarse identificables."
+  ],
+  rulesH:"Normas de uso",
+  rulesLead:"Se aplican en todas las sesiones y en todas las apps.",
+  privH:"Protección de datos",
+  priv:[
+    "Solo datos anonimizados: nunca historias clínicas ni datos de pacientes identificables.",
+    "Usa los datos de un proyecto solo si lo permiten su aprobación por el comité de ética y el consentimiento de los participantes.",
+    "Anonimiza antes de enviar: el texto y los datos viajan al proveedor de IA.",
+    "Cada participante usa su propia clave, guardada solo en su navegador."
+  ],
+  ethH:"Uso responsable",
+  eth:[
+    "Revisa todo lo que propone la IA: la responsabilidad y la firma son tuyas.",
+    "Declara el uso de IA según las normas de la revista o de la convocatoria.",
+    "Ninguna referencia entra sin verificar: las apps marcan las que no encuentran.",
+    "La IA no inventa datos del proyecto: lo que falta se marca [COMPLETAR].",
+    "Las puntuaciones y revisiones simuladas (SubvencIA, GrantWriter, ArbitrIA) orientan, pero no predicen la evaluación real."
+  ],
+  footOrg:"Curso «Herramientas de IA para la investigación» · Formación ISABIAL · Instituto de Investigación Sanitaria y Biomédica de Alicante",
+  footDev:"Desarrollo:", footLic:"Licencia MIT"
+},
+en:{
+  eyebrow:"Course · ISABIAL Training",
+  h1:"AI tools for <span>research</span>",
+  sub:"Twelve single-file web apps, with your own AI key, to find the evidence, fund the project, analyse the data and publish.",
+  stApps:"apps", stSes:"sessions", stHours:"of training", stLangs:"languages",
+  navApps:"Apps", navCourse:"Course", navKey:"AI key", navRules:"Rules of use",
+  appsH:"The twelve apps",
+  appsLead:"Each app runs in the browser, with no installation or server. They work with OpenAI, Google Gemini or Anthropic Claude. The AI proposes and the code checks.",
+  checks:"What is checked", open:"Open app", session:"Session",
+  shared:"Each participant works on their own project and every session builds on the previous one: the state of the art from session 2 supports the proposal in session 3, and the executed CuadernIA notebook is the input for NarrativIA.",
+  apps:{
+    publication_radar:{ what:"Type your topic and find out which journals actually publish on it; choose the ones to follow and browse their new articles, with DOI and export to Zotero.", chk:"Every article comes from OpenAlex and PubMed: the AI never generates references. Each journal is backed by its number of articles on the topic." },
+    doctoralia:{ what:"State-of-the-art review from six scientific databases, with a PRISMA diagram and a bibliography ready for the manuscript or the proposal.", chk:"Every citation is anchored to a real paper and verified in the browser; the citation audit flags those that do not hold." },
+    prismia:{ what:"Systematic review with three models from different providers: two screen blindly by title and abstract and by full text, and a third arbitrates only the disagreements. Searches PubMed and OpenAlex or imports RIS and CSV.", chk:"The code computes kappa and the PRISMA diagram, checks that every extracted quote appears in the text and computes the overall risk-of-bias judgement (RoB 2, ROBINS-I, QUADAS-2, Newcastle-Ottawa)." },
+    fronteria:{ what:"From your question to a research proposal: agents find the limitations of the state of the art, propose ideas, design the study and submit it to a simulated reviewer. Downloads as Word.", chk:"The novelty of each idea is checked against the most similar OpenAlex publications; the code picks the most novel approved idea; references not found are marked ⚠ and left out of the bibliography." },
+    grantwriter:{ what:"Project proposals for R&D calls (AEI, CDTI, Horizon Europe, IVACE and more): nine agents search the literature, set the strategy according to the evaluation criteria and write each section.", chk:"References come from six scientific databases; citations that do not exist and figures not found in your input are flagged; anything missing is left as [COMPLETAR]." },
+    subvencia:{ what:"Upload the call and the project; it extracts the evaluation rubric, scores the project and improves it in cycles towards the maximum.", chk:"Each criterion carries its quote from the call; the code adds up the total score with the call's weights; a change is kept only if the score rises; nothing invented ([COMPLETAR] marks)." },
+    cuadernia:{ what:"From a CSV or Excel file and a study description, it proposes an editable analysis plan and generates a Jupyter notebook with descriptive, inferential and modelling analysis (pandas, scipy, statsmodels).", chk:"Variables are profiled by code in the browser and the analysis plan is reviewed before any code is written." },
+    narrativia:{ what:"Turns the executed notebook into the Results section: it inventories tables, figures and tests in execution order and writes the scientific prose.", chk:"Tables are built with the exact notebook values and every figure in the text is audited against its outputs; unsupported numbers are flagged." },
+    refinia:{ what:"Reviews the manuscript passage by passage with several lenses in parallel (data, method and statistics, internal consistency, references and argument) and cross-checks the sections.", chk:"Each comment is anchored to its exact quote in the text, with severity and a suggested fix; findings that do not hold are filtered out." },
+    revistafit:{ what:"Searches OpenAlex for where literature similar to your manuscript is published, ranks journals by your priorities (topical fit, impact, open access, cost) and drafts the cover letter.", chk:"Each recommendation is backed by the specific OpenAlex articles published in that journal." },
+    adaptia:{ what:"Extracts an editorial profile from the author guidelines, compares the manuscript and proposes only the necessary changes as a diff you accept or reject.", chk:"Each profile rule carries its quote from the guidelines; an auditor flags by code new figures, more categorical claims and altered citations." },
+    arbitria:{ what:"Simulates the full review at an international journal: five reviewers with different roles and an editorial synthesis with a decision and a revision roadmap.", chk:"Reviewers work without seeing each other's reports; every finding carries its evidence anchor and severity, with no numerical score." }
+  },
+  courseH:"The course",
+  courseLead:"Five 2-hour sessions following the cycle of a project: evidence, funding, data and publication. From the second session on, three apps are applied to each participant's project (about 30 minutes per app) and everyone leaves with a real deliverable.",
+  thSes:"Session", thOut:"Deliverable",
+  sessions:[
+    { t:"Providers, models and your AI key", a:"Presentation and key guide", o:"Key set up with a spending limit, model chosen and project sheet (question, field and available data)." },
+    { t:"Finding and synthesising the evidence", a:"Publication Radar · Doctoralia · PRISMIA", o:"Journal radar for the field, state of the art with verified citations and a trial screening with its PRISMA diagram." },
+    { t:"Project funding", a:"FronterIA · GrantWriter · SubvencIA", o:"Proposal with checked novelty and a project for a real call, scored against its rubric and with the cycle report." },
+    { t:"From data to manuscript", a:"CuadernIA · NarrativIA · RefinIA", o:"Executed notebook, Results section with audited figures and manuscript verification report." },
+    { t:"From manuscript to journal", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Chosen journal with its cover letter, manuscript adapted to its guidelines, mock review with a roadmap and final presentation to the group." }
+  ],
+  keyH:"Your AI key",
+  keyLead:"The apps use the provider's API with your own key. The key is stored only in your browser and never goes through a course server.",
+  keyStepsH:"Create the key with a spending limit",
+  keySteps:[
+    "Create an account on the provider's developer platform (in the course, platform.openai.com).",
+    "Add a payment method and set a low monthly spending limit before creating the key.",
+    "Create an API key, copy it and store it somewhere safe: it is not shown again.",
+    "Paste it into the app, load the list of models available to your key and choose an inexpensive one.",
+    "PRISMIA asks for a different provider for each reviewer; if you only have an OpenAI key, follow the session with its example, which needs no key.",
+    "If the key is exposed, revoke it on the platform and create another."
+  ],
+  keyChooseH:"How to choose a model",
+  keyChoose:[
+    "Capability: large models reason better; small ones are enough for writing and summarising.",
+    "Cost: you pay per token (price per million); a full GrantWriter proposal costs cents.",
+    "Context window: how much text fits in one request; 1,000 tokens are about 5 or 6 pages.",
+    "Privacy: API use is not used for training by default, but health data is a special category under the GDPR and must not be sent in identifiable form."
+  ],
+  rulesH:"Rules of use",
+  rulesLead:"They apply in every session and every app.",
+  privH:"Data protection",
+  priv:[
+    "Anonymised data only: never clinical records or identifiable patient data.",
+    "Use a project's data only if its ethics committee approval and participant consent allow it.",
+    "Anonymise before sending: the text and data travel to the AI provider.",
+    "Each participant uses their own key, stored only in their browser."
+  ],
+  ethH:"Responsible use",
+  eth:[
+    "Review everything the AI proposes: responsibility and authorship are yours.",
+    "Declare AI use according to the journal's or the call's rules.",
+    "No reference goes in unverified: the apps flag those they cannot find.",
+    "The AI does not invent project data: anything missing is marked [COMPLETAR].",
+    "Simulated scores and reviews (SubvencIA, GrantWriter, ArbitrIA) give guidance but do not predict the real evaluation."
+  ],
+  footOrg:"Course «AI tools for research» · ISABIAL Training · Alicante Institute for Health and Biomedical Research",
+  footDev:"Development:", footLic:"MIT License"
+},
+pt:{
+  eyebrow:"Curso · Formação ISABIAL",
+  h1:"Ferramentas de IA para <span>a investigação</span>",
+  sub:"Doze aplicações web de um só ficheiro, com a tua própria chave de IA, para procurar a evidência, financiar o projeto, analisar os dados e publicar.",
+  stApps:"apps", stSes:"sessões", stHours:"de formação", stLangs:"idiomas",
+  navApps:"Apps", navCourse:"Curso", navKey:"Chave de IA", navRules:"Normas de utilização",
+  appsH:"As doze apps",
+  appsLead:"Cada app funciona no navegador, sem instalação nem servidor. Funcionam com OpenAI, Google Gemini ou Anthropic Claude. A IA propõe e o código verifica.",
+  checks:"O que se verifica", open:"Abrir app", session:"Sessão",
+  shared:"Cada participante trabalha sobre o seu próprio projeto e cada sessão parte do que foi produzido na anterior: o estado da arte da sessão 2 sustenta a candidatura da sessão 3, e o caderno executado do CuadernIA é a entrada do NarrativIA.",
+  apps:{
+    publication_radar:{ what:"Escreve o teu tema e descobre em que revistas se publica de facto; escolhe as que queres seguir e consulta os seus artigos novos, com DOI e exportação para o Zotero.", chk:"Todos os artigos provêm do OpenAlex e do PubMed: a IA nunca gera referências. Cada revista traz como prova o seu número de artigos sobre o tema." },
+    doctoralia:{ what:"Revisão do estado da arte a partir de seis bases científicas, com diagrama PRISMA e bibliografia pronta para o manuscrito ou a candidatura.", chk:"Cada citação fica ancorada a um artigo real e é verificada no navegador; a auditoria de citações assinala as que não se sustentam." },
+    prismia:{ what:"Revisão sistemática com três modelos de fornecedores distintos: dois fazem a triagem às cegas por título e resumo e por texto completo, e um terceiro arbitra apenas os desacordos. Pesquisa no PubMed e no OpenAlex ou importa RIS e CSV.", chk:"O código calcula o kappa e o diagrama PRISMA, verifica que cada citação da extração aparece no texto e calcula o juízo global de risco de viés (RoB 2, ROBINS-I, QUADAS-2, Newcastle-Ottawa)." },
+    fronteria:{ what:"Da tua pergunta a uma proposta de investigação: os agentes procuram as limitações do estado da arte, propõem ideias, desenham o estudo e submetem-no a um revisor simulado. Descarrega-se em Word.", chk:"A novidade de cada ideia é contrastada com as publicações mais parecidas do OpenAlex; o código escolhe a mais inovadora das aprovadas; as referências não encontradas são marcadas com ⚠ e ficam fora da bibliografia." },
+    grantwriter:{ what:"Candidaturas a concursos de I&D&I (AEI, CDTI, Horizonte Europa, IVACE e outros): nove agentes procuram bibliografia, definem a estratégia segundo os critérios de avaliação e redigem cada secção.", chk:"As referências vêm de seis bases científicas; assinalam-se as citações que não existem e os números que não constam do que forneceste; o que falta fica como [COMPLETAR]." },
+    subvencia:{ what:"Carrega o concurso e o projeto; extrai a rubrica de avaliação, pontua o projeto e melhora-o em ciclos até o aproximar do máximo.", chk:"Cada critério traz a sua citação do regulamento; a pontuação total é somada pelo código com os pesos do concurso; uma alteração só se mantém se a pontuação subir; nada inventado (marcas [COMPLETAR])." },
+    cuadernia:{ what:"A partir de um CSV ou Excel e da descrição do estudo, propõe um plano de análise editável e gera um caderno Jupyter com análise descritiva, inferencial e modelação (pandas, scipy, statsmodels).", chk:"As variáveis são perfiladas por código no navegador e o plano de análise é revisto antes de escrever o código." },
+    narrativia:{ what:"Converte o caderno já executado na secção de Resultados: inventaria tabelas, figuras e testes pela ordem de execução e redige a prosa científica.", chk:"As tabelas são construídas com os valores exatos do caderno e cada número do texto é auditado face às suas saídas; os números sem suporte são assinalados." },
+    refinia:{ what:"Revê o manuscrito passagem a passagem com várias lentes em paralelo (dados, método e estatística, consistência interna, referências e argumentação) e contrasta as secções entre si.", chk:"Cada comentário fica ancorado à sua citação exata no texto, com gravidade e sugestão de correção; os achados que não se sustentam são filtrados." },
+    revistafit:{ what:"Procura no OpenAlex onde se publica a literatura semelhante ao teu manuscrito, ordena as revistas segundo as tuas prioridades (ajuste temático, impacto, acesso aberto, custo) e redige a carta de apresentação.", chk:"Cada recomendação é justificada com os artigos concretos do OpenAlex publicados nessa revista." },
+    adaptia:{ what:"Extrai das normas para autores um perfil editorial, compara o manuscrito e propõe apenas as alterações necessárias com um diff que aceitas ou rejeitas.", chk:"Cada regra do perfil traz a sua citação das normas; um auditor assinala por código os números novos, as afirmações mais categóricas e as citações alteradas." },
+    arbitria:{ what:"Simula a revisão completa de uma revista internacional: cinco revisores com papéis distintos e uma síntese editorial com decisão e roteiro de revisão.", chk:"Os revisores trabalham sem ver os relatórios dos outros; cada achado traz a sua âncora de evidência e a sua gravidade, sem pontuação numérica." }
+  },
+  courseH:"O curso",
+  courseLead:"Cinco sessões de 2 horas que seguem o ciclo de um projeto: evidência, financiamento, dados e publicação. A partir da segunda sessão, aplicam-se três apps ao projeto de cada participante (cerca de 30 minutos por app) e sai-se com um resultado real.",
+  thSes:"Sessão", thOut:"Resultado",
+  sessions:[
+    { t:"Fornecedores, modelos e a tua chave de IA", a:"Apresentação e guia da chave", o:"Chave configurada com limite de gastos, modelo escolhido e ficha do projeto (pergunta, área e dados disponíveis)." },
+    { t:"Procurar e sintetizar a evidência", a:"Publication Radar · Doctoralia · PRISMIA", o:"Radar de revistas da área, estado da arte com citações verificadas e triagem de teste com o seu diagrama PRISMA." },
+    { t:"Financiamento de projetos", a:"FronterIA · GrantWriter · SubvencIA", o:"Proposta com a novidade contrastada e candidatura a um concurso real, pontuada com a sua rubrica e com o relatório de ciclos." },
+    { t:"Dos dados ao manuscrito", a:"CuadernIA · NarrativIA · RefinIA", o:"Caderno executado, secção de Resultados com os números auditados e relatório de verificação do manuscrito." },
+    { t:"Do manuscrito à revista", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Revista escolhida com a carta de apresentação, manuscrito adaptado às suas normas, simulação de revisão com roteiro e apresentação final ao grupo." }
+  ],
+  keyH:"A tua chave de IA",
+  keyLead:"As apps usam a API do fornecedor com a tua própria chave. A chave é guardada apenas no teu navegador e nunca passa por um servidor do curso.",
+  keyStepsH:"Criar a chave com limite de gastos",
+  keySteps:[
+    "Cria uma conta na plataforma de programadores do fornecedor (no curso, platform.openai.com).",
+    "Adiciona um método de pagamento e define um limite de gastos mensal baixo antes de criar a chave.",
+    "Cria uma chave de API, copia-a e guarda-a num lugar seguro: não volta a ser mostrada.",
+    "Cola-a na app, carrega a lista de modelos disponíveis para a tua chave e escolhe um económico.",
+    "O PRISMIA pede um fornecedor diferente para cada revisor; se só tiveres a chave da OpenAI, acompanha a sessão com o seu exemplo, que não precisa de chave.",
+    "Se a chave ficar exposta, revoga-a na plataforma e cria outra."
+  ],
+  keyChooseH:"Como escolher o modelo",
+  keyChoose:[
+    "Capacidade: os modelos grandes raciocinam melhor; os pequenos bastam para redigir e resumir.",
+    "Custo: paga-se por tokens (preço por milhão); uma candidatura completa do GrantWriter custa cêntimos.",
+    "Janela de contexto: quanto texto cabe num pedido; 1.000 tokens equivalem a cerca de 5 ou 6 páginas.",
+    "Privacidade: o uso por API não é utilizado para treino por defeito, mas os dados de saúde são categoria especial do RGPD e não devem ser enviados de forma identificável."
+  ],
+  rulesH:"Normas de utilização",
+  rulesLead:"Aplicam-se em todas as sessões e em todas as apps.",
+  privH:"Proteção de dados",
+  priv:[
+    "Apenas dados anonimizados: nunca processos clínicos nem dados de doentes identificáveis.",
+    "Usa os dados de um projeto apenas se a aprovação da comissão de ética e o consentimento dos participantes o permitirem.",
+    "Anonimiza antes de enviar: o texto e os dados viajam até ao fornecedor de IA.",
+    "Cada participante usa a sua própria chave, guardada apenas no seu navegador."
+  ],
+  ethH:"Utilização responsável",
+  eth:[
+    "Revê tudo o que a IA propõe: a responsabilidade e a autoria são tuas.",
+    "Declara o uso de IA segundo as normas da revista ou do concurso.",
+    "Nenhuma referência entra sem verificação: as apps assinalam as que não encontram.",
+    "A IA não inventa dados do projeto: o que falta é marcado [COMPLETAR].",
+    "As pontuações e revisões simuladas (SubvencIA, GrantWriter, ArbitrIA) orientam, mas não preveem a avaliação real."
+  ],
+  footOrg:"Curso «Ferramentas de IA para a investigação» · Formação ISABIAL · Instituto de Investigação Sanitária e Biomédica de Alicante",
+  footDev:"Desenvolvimento:", footLic:"Licença MIT"
+}
+};
+
+let lang = "es";
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(){
+  const L = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = L[el.dataset.i18n]; });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = L[el.dataset.i18nHtml]; });
+  document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("active", b.dataset.l === lang));
+
+  document.getElementById("groups").innerHTML = [2,3,4,5].map(n => {
+    const cards = APPS.filter(a => a.ses === n).map(a => {
+      const A = L.apps[a.id];
+      const url = `https://fborrasumh.github.io/${a.id}/`;
+      return `<article class="card">
+        <div class="card-h"><div class="icon-box"><i class="ti ${a.icon}"></i></div><h4>${a.name}</h4></div>
+        <p>${esc(A.what)}</p>
+        <div class="chk"><b>${esc(L.checks)}</b>${esc(A.chk)}</div>
+        <div class="foot"><a class="btn" href="${url}" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> ${esc(L.open)}</a></div>
+      </article>`;
+    }).join("");
+    return `<div class="sgroup" style="--c:var(${SES_COLOR[n]})"><h3>${esc(L.session)} ${n} · ${esc(L.sessions[n-1].t)}</h3><div class="grid">${cards}</div></div>`;
+  }).join("");
+
+  document.getElementById("sessions").innerHTML =
+    `<div class="srow head"><div></div><div>${esc(L.thSes)}</div><div class="hide-sm">${esc(L.thOut)}</div></div>` +
+    L.sessions.map((s,i) => `<div class="srow" style="--c:var(${SES_COLOR[i+1]})">
+      <div class="snum">${i+1}</div>
+      <div><div class="stit">${esc(s.t)}</div><div class="sapp">${esc(s.a)}</div></div>
+      <div class="hide-sm">${esc(s.o)}</div>
+    </div>`).join("");
+
+  const list = (id, arr) => { document.getElementById(id).innerHTML = arr.map(x => `<li>${esc(x)}</li>`).join(""); };
+  list("keySteps", L.keySteps); list("keyChoose", L.keyChoose); list("priv", L.priv); list("eth", L.eth);
+}
+
+function setLang(l){
+  lang = l;
+  try { localStorage.setItem("isabial-lang", l); } catch(e) {}
+  render();
+}
+
+document.getElementById("langs").innerHTML = LANGS.map(l => `<button data-l="${l}" onclick="setLang('${l}')">${l.toUpperCase()}</button>`).join("");
+try {
+  const saved = localStorage.getItem("isabial-lang");
+  lang = LANGS.includes(saved) ? saved : "es";
+} catch(e) {}
+render();
+</script>
+</body>
+</html>
