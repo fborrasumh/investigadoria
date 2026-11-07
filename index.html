@@ -68,6 +68,7 @@ h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; lette
 .snum { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--c, var(--text)); }
 .stit { font-weight: 600; }
 .sapp { font-size: 12px; color: var(--muted); }
+.slink { display: inline-flex; align-items: center; gap: 5px; margin-top: 6px; font-size: 13px; font-weight: 600; text-decoration: none; }
 
 /* STEPS / RULES */
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
@@ -221,7 +222,7 @@ es:{
   },
   courseH:"El curso",
   courseLead:"Cinco sesiones de 2 horas que siguen el ciclo de un proyecto: evidencia, financiación, datos y publicación. Desde la segunda sesión se trabajan tres apps sobre el proyecto de cada participante (unos 30 minutos por app) y se sale con un entregable real.",
-  thSes:"Sesión", thOut:"Entregable",
+  thSes:"Sesión", thOut:"Entregable", slides:"Ver la presentación",
   sessions:[
     { t:"Proveedores, modelos y tu clave de IA", a:"Presentación y guía de la clave", o:"Clave configurada con límite de gasto, modelo elegido y ficha del proyecto (pregunta, campo y datos disponibles)." },
     { t:"Buscar y sintetizar la evidencia", a:"Publication Radar · Doctoralia · PRISMIA", o:"Radar de revistas del área, estado del arte con citas verificadas y cribado de prueba con su diagrama PRISMA." },
@@ -293,7 +294,7 @@ en:{
   },
   courseH:"The course",
   courseLead:"Five 2-hour sessions following the cycle of a project: evidence, funding, data and publication. From the second session on, three apps are applied to each participant's project (about 30 minutes per app) and everyone leaves with a real deliverable.",
-  thSes:"Session", thOut:"Deliverable",
+  thSes:"Session", thOut:"Deliverable", slides:"View the slides (in Spanish)",
   sessions:[
     { t:"Providers, models and your AI key", a:"Presentation and key guide", o:"Key set up with a spending limit, model chosen and project sheet (question, field and available data)." },
     { t:"Finding and synthesising the evidence", a:"Publication Radar · Doctoralia · PRISMIA", o:"Journal radar for the field, state of the art with verified citations and a trial screening with its PRISMA diagram." },
@@ -365,7 +366,7 @@ pt:{
   },
   courseH:"O curso",
   courseLead:"Cinco sessões de 2 horas que seguem o ciclo de um projeto: evidência, financiamento, dados e publicação. A partir da segunda sessão, aplicam-se três apps ao projeto de cada participante (cerca de 30 minutos por app) e sai-se com um resultado real.",
-  thSes:"Sessão", thOut:"Resultado",
+  thSes:"Sessão", thOut:"Resultado", slides:"Ver a apresentação (em espanhol)",
   sessions:[
     { t:"Fornecedores, modelos e a tua chave de IA", a:"Apresentação e guia da chave", o:"Chave configurada com limite de gastos, modelo escolhido e ficha do projeto (pergunta, área e dados disponíveis)." },
     { t:"Procurar e sintetizar a evidência", a:"Publication Radar · Doctoralia · PRISMIA", o:"Radar de revistas da área, estado da arte com citações verificadas e triagem de teste com o seu diagrama PRISMA." },
@@ -442,7 +443,7 @@ function render(){
     `<div class="srow head"><div></div><div>${esc(L.thSes)}</div><div class="hide-sm">${esc(L.thOut)}</div></div>` +
     L.sessions.map((s,i) => `<div class="srow" style="--c:var(${SES_COLOR[i+1]})">
       <div class="snum">${i+1}</div>
-      <div><div class="stit">${esc(s.t)}</div><div class="sapp">${esc(s.a)}</div></div>
+      <div><div class="stit">${esc(s.t)}</div><div class="sapp">${esc(s.a)}</div>${i === 0 ? `<a class="slink" href="sesion1/"><i class="ti ti-presentation"></i> ${esc(L.slides)}</a>` : ""}</div>
       <div class="hide-sm">${esc(s.o)}</div>
     </div>`).join("");
 

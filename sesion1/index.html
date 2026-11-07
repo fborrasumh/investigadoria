@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sesión 1 · Proveedores, modelos y tu clave de IA · Formación ISABIAL</title>
+<meta name="description" content="Presentación de la sesión 1 del curso «Herramientas de IA para la investigación» (Formación ISABIAL): qué hay detrás del chat, cuánto cuesta un modelo, cómo elegirlo y cómo crear tu clave de API con límite de gasto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #12141a; --card: #1c1f28; --line: #2c303c; --text: #eef0f4; --muted: #9aa1b0;
+  --blue: #6f95d6; --orange: #ef8a4c; --green: #4cc38a; --red: #e5626a;
+}
+html, body { height: 100%; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+a { color: var(--blue); }
+
+/* DECK */
+.deck { height: 100%; position: relative; }
+.slide { position: absolute; inset: 0 0 56px 0; padding: 48px clamp(20px, 6vw, 96px); overflow-y: auto;
+  display: none; flex-direction: column; justify-content: center; gap: 22px; }
+.slide.on { display: flex; animation: in .35s ease; }
+@keyframes in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.slide > * { max-width: 1180px; width: 100%; margin-left: auto; margin-right: auto; }
+
+.kicker { font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); }
+h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 800; line-height: 1.08; letter-spacing: -.03em; }
+h2 { font-family: 'Sora', sans-serif; font-size: clamp(1.5rem, 3.4vw, 2.5rem); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; }
+h2 em, h1 em { font-style: normal; color: var(--orange); }
+h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+p, li { font-size: clamp(.95rem, 1.5vw, 1.15rem); line-height: 1.55; color: #d6d9e0; }
+.lead { color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.25rem); }
+ul.clean { list-style: none; display: grid; gap: 10px; }
+ul.clean li { padding-left: 26px; position: relative; }
+ul.clean li::before { content: "→"; position: absolute; left: 0; color: var(--orange); }
+.small { font-size: .85rem; color: var(--muted); }
+.src { font-size: .78rem; color: var(--muted); }
+code, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+.two.wide-left { grid-template-columns: 1.3fr 1fr; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+.card .n { font-family: 'Sora', sans-serif; font-weight: 800; color: var(--orange); font-size: 1.3rem; }
+.card p { font-size: .98rem; color: #c3c8d2; }
+.card.hl { border-color: var(--orange); }
+.big { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.4rem); }
+figure img { max-width: 100%; max-height: 58vh; width: auto; height: auto; display: block; margin: 0 auto; border-radius: 12px; }
+figure.light img { background: #fff; }
+figcaption { font-size: .8rem; color: var(--muted); margin-top: 8px; }
+.svgbox { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+.svgbox svg { width: 100%; height: auto; display: block; }
+.tip { border-left: 3px solid var(--orange); background: #241f1b; padding: 12px 16px; border-radius: 0 10px 10px 0; }
+.tip p { color: #f2d9c8; }
+
+/* SECCIONES (ACTOS) */
+.act { text-align: left; }
+.act .num { font-family: 'Sora', sans-serif; font-size: clamp(4rem, 12vw, 9rem); font-weight: 800; color: #262a36; line-height: 1; }
+
+/* PORTADA */
+.cover .logo { background: #fff; border-radius: 12px; padding: 10px 16px; width: fit-content; }
+.cover .logo img { height: 60px; display: block; }
+
+/* MAQUETAS DE PANTALLA */
+.mock { background: #fff; color: #222; border-radius: 10px; overflow: hidden; font-size: 13px; }
+.mock .bar { background: #eceef2; padding: 7px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #555; }
+.mock .body { padding: 14px; display: grid; gap: 8px; }
+.mock .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.mock .btn { background: #10a37f; color: #fff; border-radius: 6px; padding: 5px 10px; font-weight: 600; font-size: 12px; }
+.mock .tog { width: 34px; height: 18px; border-radius: 99px; background: #ccc; position: relative; }
+.mock .tog::after { content: ""; position: absolute; left: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+.mock .key { font-family: 'JetBrains Mono', monospace; background: #f4f4f6; border-radius: 6px; padding: 6px 8px; font-size: 11px; }
+
+.steps { counter-reset: s; display: grid; gap: 12px; }
+.steps li { list-style: none; counter-increment: s; padding-left: 40px; position: relative; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--orange); color: #12141a; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+
+table.t { width: 100%; border-collapse: collapse; font-size: .95rem; }
+table.t th, table.t td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+table.t th { color: var(--muted); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; }
+pre.code { background: #0d0f14; border: 1px solid var(--line); border-radius: 12px; padding: 16px; font-size: .85rem; line-height: 1.5; color: #c9d4e8; overflow-x: auto; white-space: pre-wrap; }
+pre.code .v { color: var(--orange); }
+
+.shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.shots figure img { border: 1px solid var(--line); max-height: 46vh; }
+.ficha { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.ficha div { border: 1px dashed #4a5060; border-radius: 10px; padding: 12px 14px; min-height: 64px; }
+.ficha b { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+
+/* BARRA INFERIOR */
+.nav { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 16px; border-top: 1px solid var(--line); background: #0f1116; }
+.nav button { background: var(--card); color: var(--text); border: 1px solid var(--line); border-radius: 99px; width: 40px; height: 36px; font-size: 18px; cursor: pointer; }
+.nav button:hover { border-color: var(--blue); }
+.nav .back { font-size: 13px; text-decoration: none; color: var(--muted); }
+.nav .count { font-size: 13px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+.prog { position: absolute; top: 0; left: 0; height: 3px; background: var(--orange); transition: width .3s; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+@media (max-width: 820px) {
+  .two, .two.wide-left, .grid3, .grid2, .shots, .ficha { grid-template-columns: 1fr; }
+  .slide { justify-content: flex-start; padding-top: 28px; }
+}
+@media print {
+  body { overflow: visible; }
+  .slide { display: flex !important; position: relative; inset: auto; min-height: 100vh; page-break-after: always; }
+  .nav, .prog { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+<div class="prog" id="prog"></div>
+
+<!-- 1 · PORTADA -->
+<section class="slide cover">
+  <div><div class="logo"><img src="../assets/logo-isabial.png" alt="ISABIAL"></div></div>
+  <p class="kicker">Herramientas de IA para la investigación · Sesión 1 de 5</p>
+  <h1>Proveedores, modelos<br>y <em>tu clave de IA</em></h1>
+  <p class="lead">Qué hay detrás del chat, cuánto cuesta un modelo, cómo elegirlo y cómo salir hoy con tu clave lista y protegida.</p>
+  <p class="small">Fernando Borrás Rocher · Universidad Miguel Hernández · Formación ISABIAL</p>
+</section>
+
+<!-- 2 · OBJETIVOS -->
+<section class="slide">
+  <p class="kicker">Qué te llevas hoy</p>
+  <h2>Tres objetivos para las próximas <em>2 horas</em></h2>
+  <div class="grid3">
+    <div class="card"><div class="n">1</div><h3>Entender la máquina</h3><p>Qué ocurre entre tu pregunta y la respuesta, y por qué el chat es solo una de las puertas.</p></div>
+    <div class="card"><div class="n">2</div><h3>Elegir con criterio</h3><p>Capacidad, coste, memoria y privacidad: cuatro preguntas para decidir qué modelo usar en cada tarea.</p></div>
+    <div class="card hl"><div class="n">3</div><h3>Salir con tu clave</h3><p>Clave de API con límite de gasto, un modelo elegido y la ficha de tu proyecto para el resto del curso.</p></div>
+  </div>
+</section>
+
+<!-- 3 · MAPA -->
+<section class="slide">
+  <p class="kicker">Hoja de ruta</p>
+  <h2>25 conceptos en <em>cuatro actos</em></h2>
+  <figure class="light"><a href="img/mapa.jpg" target="_blank" rel="noopener"><img src="img/mapa.jpg" alt="Mapa conceptual con los cuatro actos: infraestructura oculta, economía del modelo, criterios de elección y aplicación"></a>
+    <figcaption>Pulsa la imagen para verla a tamaño completo. Hoy recorremos los cuatro actos; no hace falta memorizar el mapa.</figcaption></figure>
+</section>
+
+<!-- 4 · ACTO 1 -->
+<section class="slide act">
+  <div class="num">01</div>
+  <p class="kicker">Acto 1</p>
+  <h1>La infraestructura oculta:<br><em>más allá del chatbot</em></h1>
+</section>
+
+<!-- 5 · PROMPT / OUTPUT -->
+<section class="slide">
+  <div class="two wide-left">
+    <figure><img src="img/prompt.jpg" alt="Captura de un chat: arriba el prompt (entrada), abajo la respuesta del modelo (output)"></figure>
+    <div>
+      <p class="kicker">Lo esencial</p>
+      <h2>Todo es <em>entrada → salida</em></h2>
+      <ul class="clean">
+        <li>Escribes un <b>prompt</b> (entrada) y el modelo genera una <b>respuesta</b> (salida), palabra a palabra.</li>
+        <li>El chat es solo la interfaz: cómoda, pero rígida y con pocas opciones de control.</li>
+        <li>Las apps del curso hablan con el mismo modelo, pero sin chat de por medio.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · PROVEEDORES -->
+<section class="slide">
+  <div class="two">
+    <figure class="light"><img src="img/proveedores.jpg" alt="Logos de proveedores de IA: ChatGPT, Gemini, Claude, Grok (EE. UU.), Mistral AI (Europa), DeepSeek, Z.ai, Qwen y Kimi (China)"></figure>
+    <div>
+      <p class="kicker">No solo ChatGPT</p>
+      <h2>Un mercado con <em>tres polos</em></h2>
+      <ul class="clean">
+        <li><b>EE. UU.:</b> OpenAI, Google (Gemini), Anthropic (Claude), xAI (Grok).</li>
+        <li><b>Europa:</b> Mistral AI.</li>
+        <li><b>China:</b> DeepSeek, Qwen, Kimi, Z.ai, muchos con modelos abiertos.</li>
+        <li>En el curso usamos <b>OpenAI, Gemini y Claude</b>, con tu propia clave.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · MIR -->
+<section class="slide">
+  <p class="kicker">¿Cuánto saben?</p>
+  <figure class="light"><img src="img/mir.jpg" alt="Gráfico: ChatGPT-3.5 acertó el 51,4 % del MIR 2022; o1 Pro el 91,7 % en 2025; GPT-5.2 el 97,1 % en 2026 con imágenes"></figure>
+  <div class="tip"><p>Más capaces no significa infalibles: un 3 % de error en un examen es mucho en un manuscrito. Por eso todas las apps del curso comprueban con código lo que propone la IA.</p></div>
+</section>
+
+<!-- 8 · SUSCRIPCIÓN O API -->
+<section class="slide">
+  <p class="kicker">Dos formas de pagar la inteligencia</p>
+  <h2>Suscripción o <em>API key</em></h2>
+  <div class="grid2">
+    <div class="card"><h3 style="color:var(--blue)">Suscripción</h3><p class="big">≈ 20 € <span class="small">al mes</span></p><p>Interfaz de chat lista para usar, con límites de uso. Ideal para conversar, explorar y trabajar a mano.</p></div>
+    <div class="card hl"><h3 style="color:var(--orange)">API key</h3><p class="big">por token</p><p>Sin interfaz: la conectas a tus apps, hojas de cálculo o cuadernos. Tú eliges el modelo y controlas el gasto.</p></div>
+  </div>
+  <div class="card"><p><b>Ejemplo:</b> resumir una charla entera por API cuesta ≈ <b style="color:var(--orange)">0,10 $</b> con un modelo grande (Claude Opus 5.5) y ≈ <b style="color:var(--blue)">0,004 $</b> con uno pequeño (GPT-4o mini).</p>
+  <p class="src">Cálculo: 18 000 tokens de entrada y 1 500 de salida. Tarifas de octubre de 2026.</p></div>
+  <div class="tip"><p>Tener ChatGPT Plus <b>no</b> da acceso a la API: son productos distintos con facturación separada.</p></div>
+</section>
+
+<!-- 9 · QUÉ ES UNA API -->
+<section class="slide">
+  <p class="kicker">Concepto clave</p>
+  <h2>¿Qué es una <em>API</em>?</h2>
+  <div class="svgbox">
+    <svg viewBox="0 0 900 220" role="img" aria-label="Esquema: la app en tu navegador envía la petición con tu clave a la API del proveedor, el modelo responde y la respuesta vuelve a la app">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ef8a4c"/></marker></defs>
+      <g font-family="Inter, sans-serif" text-anchor="middle">
+        <rect x="10" y="60" width="200" height="100" rx="14" fill="#262a36" stroke="#6f95d6"/>
+        <text x="110" y="100" fill="#eef0f4" font-size="18" font-weight="600">App del curso</text>
+        <text x="110" y="126" fill="#9aa1b0" font-size="14">en tu navegador</text>
+        <rect x="350" y="60" width="200" height="100" rx="14" fill="#262a36" stroke="#ef8a4c"/>
+        <text x="450" y="100" fill="#eef0f4" font-size="18" font-weight="600">API</text>
+        <text x="450" y="126" fill="#9aa1b0" font-size="14">la «puerta» del proveedor</text>
+        <rect x="690" y="60" width="200" height="100" rx="14" fill="#262a36" stroke="#4cc38a"/>
+        <text x="790" y="100" fill="#eef0f4" font-size="18" font-weight="600">Modelo</text>
+        <text x="790" y="126" fill="#9aa1b0" font-size="14">GPT, Gemini, Claude</text>
+        <line x1="215" y1="90" x2="345" y2="90" stroke="#ef8a4c" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="555" y1="90" x2="685" y2="90" stroke="#ef8a4c" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="685" y1="135" x2="555" y2="135" stroke="#4cc38a" stroke-width="2.5" marker-end="url(#ar)"/>
+        <line x1="345" y1="135" x2="215" y2="135" stroke="#4cc38a" stroke-width="2.5" marker-end="url(#ar)"/>
+        <text x="280" y="75" fill="#ef8a4c" font-size="13">prompt + 🔑 clave</text>
+        <text x="280" y="160" fill="#4cc38a" font-size="13">respuesta</text>
+        <text x="450" y="205" fill="#9aa1b0" font-size="13">La clave identifica quién paga. Se guarda solo en tu navegador.</text>
+      </g>
+    </svg>
+  </div>
+  <p>Una API es un camarero: la app hace el pedido, la API lo lleva a la cocina (el modelo) y vuelve con el plato. La clave es tu tarjeta de cliente.</p>
+</section>
+
+<!-- 10 · NUBE O LOCAL -->
+<section class="slide">
+  <p class="kicker">Dónde vive el modelo</p>
+  <h2>Cerrado o abierto, <em>nube o local</em></h2>
+  <div class="grid2">
+    <div class="card"><h3>Modelos cerrados</h3><p>GPT, Gemini, Claude: solo se usan a través del proveedor. Son los más capaces y los que usamos en el curso.</p></div>
+    <div class="card"><h3>Modelos abiertos</h3><p>Llama, Qwen, DeepSeek, Mistral: se pueden descargar y ejecutar en tu equipo o en un servidor propio.</p></div>
+    <div class="card hl"><h3>En la nube (este curso)</h3><p>Nada que instalar: pagas por uso y el texto viaja al proveedor. Por eso trabajamos con datos anonimizados.</p></div>
+    <div class="card"><h3>En local</h3><p>Los datos no salen del equipo, pero exige hardware potente y los modelos que caben son menos capaces.</p></div>
+  </div>
+</section>
+
+<!-- 11 · ACTO 2 -->
+<section class="slide act">
+  <div class="num">02</div>
+  <p class="kicker">Acto 2</p>
+  <h1>La economía<br><em>del modelo</em></h1>
+</section>
+
+<!-- 12 · TOKENS -->
+<section class="slide">
+  <p class="kicker">La unidad de todo</p>
+  <h2>El modelo no lee palabras: <em>lee tokens</em></h2>
+  <div class="svgbox">
+    <svg viewBox="0 0 900 150" role="img" aria-label="La frase «La hipertensión arterial es frecuente» dividida en trozos llamados tokens">
+      <g font-family="JetBrains Mono, monospace" font-size="22" text-anchor="middle">
+        <rect x="20" y="30" width="60" height="50" rx="8" fill="#3b4f7a"/><text x="50" y="63" fill="#fff">La</text>
+        <rect x="88" y="30" width="80" height="50" rx="8" fill="#7a4a2b"/><text x="128" y="63" fill="#fff">·hip</text>
+        <rect x="176" y="30" width="80" height="50" rx="8" fill="#2f6b52"/><text x="216" y="63" fill="#fff">erten</text>
+        <rect x="264" y="30" width="70" height="50" rx="8" fill="#6b3b6e"/><text x="299" y="63" fill="#fff">sión</text>
+        <rect x="342" y="30" width="80" height="50" rx="8" fill="#3b4f7a"/><text x="382" y="63" fill="#fff">·arter</text>
+        <rect x="430" y="30" width="60" height="50" rx="8" fill="#7a4a2b"/><text x="460" y="63" fill="#fff">ial</text>
+        <rect x="498" y="30" width="60" height="50" rx="8" fill="#2f6b52"/><text x="528" y="63" fill="#fff">·es</text>
+        <rect x="566" y="30" width="80" height="50" rx="8" fill="#6b3b6e"/><text x="606" y="63" fill="#fff">·frec</text>
+        <rect x="654" y="30" width="80" height="50" rx="8" fill="#3b4f7a"/><text x="694" y="63" fill="#fff">uente</text>
+        <text x="800" y="63" fill="#ef8a4c" font-family="Inter, sans-serif" font-weight="700">= 9 tokens</text>
+        <text x="450" y="125" fill="#9aa1b0" font-family="Inter, sans-serif" font-size="15">5 palabras · 9 tokens (división ilustrativa)</text>
+      </g>
+    </svg>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Regla rápida</h3><p class="big" style="font-size:2rem">1 000 tokens ≈ 5–6 páginas</p></div>
+    <div class="card"><h3>En español gastas más</h3><p>Las palabras se parten en más trozos que en inglés: el mismo texto consume más tokens y cuesta algo más.</p></div>
+  </div>
+</section>
+
+<!-- 13 · PRECIO -->
+<section class="slide">
+  <p class="kicker">Cómo se paga</p>
+  <h2>Precio por <em>millón de tokens</em>, y la salida cuesta más</h2>
+  <div class="grid2">
+    <div class="card"><h3 style="color:var(--blue)">Entrada (input)</h3><p>Todo lo que envías: tu pregunta, las instrucciones de la app y los documentos que adjuntas.</p></div>
+    <div class="card"><h3 style="color:var(--orange)">Salida (output)</h3><p>Lo que el modelo escribe. Suele costar unas <b>4–5 veces más</b> por token que la entrada.</p></div>
+  </div>
+  <div class="card">
+    <p><b>Cuenta de servilleta:</b> un artículo de 20 páginas (≈ 4 000 tokens) + un resumen de 1 página (≈ 200 tokens) con un modelo de 2 $ / 10 $ por millón:</p>
+    <p class="mono" style="margin-top:8px">4 000 × 2 / 1 000 000 + 200 × 10 / 1 000 000 = <b style="color:var(--orange)">0,010 $</b></p>
+  </div>
+</section>
+
+<!-- 14 · FAMILIAS -->
+<section class="slide">
+  <p class="kicker">Familias de modelos</p>
+  <h2>De la gama económica a la de razonamiento: <em>100× de diferencia</em></h2>
+  <div style="overflow-x:auto">
+  <table class="t">
+    <thead><tr><th>Modelo</th><th>Para qué</th><th>Entrada / salida ($ por millón)</th></tr></thead>
+    <tbody>
+      <tr><td><b>GPT-6 Luna</b></td><td>Tareas acotadas y gran volumen</td><td class="mono">0,10 / 0,50</td></tr>
+      <tr><td><b>GPT-6.1 Terra</b></td><td>Razonamiento visual y trabajo de oficina</td><td class="mono">1 / 5</td></tr>
+      <tr><td><b>GPT-6.1 Sol</b></td><td>Equilibrio entre capacidad y coste</td><td class="mono">2 / 10</td></tr>
+      <tr><td><b>GPT-6 Astra</b></td><td>El razonamiento más exigente</td><td class="mono" style="color:var(--orange)">10 / 50</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src">Tarifas base de OpenAI a finales de 2026, recopiladas por Lisdata. Los precios cambian: consúltalos siempre en la página del proveedor.</p>
+  <div class="tip"><p>Empieza siempre por el económico. Sube de gama solo si la tarea lo necesita de verdad.</p></div>
+</section>
+
+<!-- 15 · COSTE REAL -->
+<section class="slide">
+  <div class="two">
+    <figure class="light"><img src="img/usage.jpg" alt="Panel Usage de la plataforma de OpenAI: gasto total de 0,03 dólares en dos semanas"></figure>
+    <div>
+      <p class="kicker">Coste real</p>
+      <h2>Dos semanas de pruebas: <em>3 céntimos</em></h2>
+      <ul class="clean">
+        <li>Panel <b>Usage</b> de la plataforma de OpenAI tras varias simulaciones de una entrevista clínica de 20 preguntas con un modelo económico.</li>
+        <li>Con <b>5 $</b> de saldo tienes de sobra para las cinco sesiones del curso.</li>
+        <li>Revisa este panel de vez en cuando: es tu extracto bancario de la IA.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 16 · ACTO 3 -->
+<section class="slide act">
+  <div class="num">03</div>
+  <p class="kicker">Acto 3</p>
+  <h1>Criterios de elección:<br><em>inteligencia, memoria y leyes</em></h1>
+</section>
+
+<!-- 17 · PARETO -->
+<section class="slide">
+  <p class="kicker">Inteligencia frente a coste</p>
+  <h2>Busca la <em>frontera</em>, no el más caro</h2>
+  <div class="two wide-left">
+    <div class="svgbox">
+      <svg viewBox="0 0 520 320" role="img" aria-label="Esquema: cada punto es un modelo; los de la frontera dan la máxima inteligencia para cada nivel de coste">
+        <g font-family="Inter, sans-serif">
+          <line x1="50" y1="280" x2="500" y2="280" stroke="#4a5060"/><line x1="50" y1="280" x2="50" y2="20" stroke="#4a5060"/>
+          <text x="275" y="310" fill="#9aa1b0" font-size="13" text-anchor="middle">Coste →</text>
+          <text x="20" y="150" fill="#9aa1b0" font-size="13" text-anchor="middle" transform="rotate(-90 20 150)">Inteligencia →</text>
+          <path d="M70,200 C140,120 220,80 470,50" fill="none" stroke="#ef8a4c" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <circle cx="75" cy="196" r="7" fill="#ef8a4c"/><circle cx="160" cy="112" r="7" fill="#ef8a4c"/><circle cx="290" cy="72" r="7" fill="#ef8a4c"/><circle cx="465" cy="52" r="7" fill="#ef8a4c"/>
+          <circle cx="200" cy="200" r="7" fill="#6f95d6"/><circle cx="330" cy="150" r="7" fill="#6f95d6"/><circle cx="420" cy="120" r="7" fill="#6f95d6"/><circle cx="260" cy="240" r="7" fill="#6f95d6"/>
+          <text x="330" y="175" fill="#9aa1b0" font-size="12">pagas más por lo mismo</text>
+          <text x="190" y="62" fill="#ef8a4c" font-size="12">frontera de Pareto</text>
+        </g>
+      </svg>
+    </div>
+    <ul class="clean">
+      <li>Cada punto es un modelo. Los de la línea dan la máxima inteligencia para su precio.</li>
+      <li>Los de debajo cuestan lo mismo y rinden menos: descártalos.</li>
+      <li>Compara modelos actualizados en <a href="https://artificialanalysis.ai/models" target="_blank" rel="noopener">artificialanalysis.ai</a>.</li>
+    </ul>
+  </div>
+  <p class="src">Esquema ilustrativo, sin datos reales.</p>
+</section>
+
+<!-- 18 · CONTEXTO -->
+<section class="slide">
+  <p class="kicker">Memoria de trabajo</p>
+  <h2>La ventana de contexto: <em>cuánto cabe</em> en una petición</h2>
+  <div class="svgbox">
+    <svg viewBox="0 0 900 190" role="img" aria-label="Barra que compara un artículo de 20 páginas con una ventana de contexto de 128 000 tokens, unas 500 a 600 páginas en español">
+      <g font-family="Inter, sans-serif">
+        <rect x="20" y="40" width="860" height="44" rx="10" fill="#262a36" stroke="#4a5060"/>
+        <rect x="20" y="40" width="30" height="44" rx="10" fill="#ef8a4c"/>
+        <text x="60" y="68" fill="#eef0f4" font-size="15">un artículo de 20 páginas</text>
+        <text x="870" y="30" fill="#9aa1b0" font-size="14" text-anchor="end">128 000 tokens ≈ 500–600 páginas en español</text>
+        <text x="20" y="130" fill="#d6d9e0" font-size="15">Todo cuenta dentro de la ventana: instrucciones de la app + tus documentos + la conversación + la respuesta.</text>
+        <text x="20" y="160" fill="#9aa1b0" font-size="14">Si te pasas, el modelo «olvida» el principio o la petición falla.</text>
+      </g>
+    </svg>
+  </div>
+  <div class="tip"><p>Para muchos documentos, las apps no meten todo en la ventana: buscan los fragmentos relevantes y solo envían esos (lo que se llama RAG).</p></div>
+</section>
+
+<!-- 19 · TEMPERATURA -->
+<section class="slide">
+  <p class="kicker">Creatividad controlada</p>
+  <h2>La temperatura: <em>de preciso a creativo</em></h2>
+  <div class="grid3">
+    <div class="card hl"><h3 style="color:var(--green)">Baja · 0 – 0,3</h3><p>Respuestas estables y repetibles. Extraer datos, clasificar, cribar artículos, revisar cifras.</p></div>
+    <div class="card"><h3 style="color:var(--blue)">Media · 0,5 – 0,7</h3><p>Equilibrio. Redactar secciones, resumir, reescribir con estilo.</p></div>
+    <div class="card"><h3 style="color:var(--red)">Alta · 0,9 o más</h3><p>Variedad e ideas inesperadas, con más riesgo de inventar. Lluvia de ideas.</p></div>
+  </div>
+  <p class="lead">En investigación, por defecto, temperatura baja. Las apps del curso ya la fijan por ti en cada paso.</p>
+</section>
+
+<!-- 20 · PROMPT DE SISTEMA -->
+<section class="slide">
+  <div class="two">
+    <div>
+      <p class="kicker">Lo que no ves</p>
+      <h2>Prompt de sistema y <em>salida estructurada</em></h2>
+      <ul class="clean">
+        <li>El <b>prompt de sistema</b> son las instrucciones fijas que la app envía antes de tu texto.</li>
+        <li>Pedir la respuesta en <b>JSON</b> permite que el código la lea, la compruebe y la convierta en tablas.</li>
+        <li>Tú solo aportas tu material: las apps llevan dentro sus prompts probados.</li>
+      </ul>
+    </div>
+<pre class="code">Eres un experto lector de artículos científicos.
+Analiza el paper y responde en JSON estricto:
+{
+  "title": "título detectado",
+  "sections": ["lista", "de", "secciones"],
+  "type": "experimental/review/...",
+  "year": "año si disponible"
+}
+DISCIPLINA: <span class="v">{{discipline}}</span>
+PAPER: <span class="v">{{paper_text}}</span></pre>
+  </div>
+</section>
+
+<!-- 21 · PRIVACIDAD Y ÉTICA -->
+<section class="slide">
+  <p class="kicker">Leyes y responsabilidad</p>
+  <h2>Privacidad, RGPD y <em>uso ético</em></h2>
+  <div class="grid2">
+    <div class="card"><h3>Datos de salud</h3><p>Son categoría especial del RGPD. Nunca envíes historias clínicas ni datos identificables: anonimiza antes.</p></div>
+    <div class="card"><h3>Revisa los resultados</h3><p>La IA propone; la responsabilidad y la firma son tuyas.</p></div>
+    <div class="card"><h3>Declara su uso</h3><p>Según las normas de la revista o de la convocatoria. Muchas ya lo exigen.</p></div>
+    <div class="card"><h3>Úsala con prudencia</h3><p>Ninguna cita ni cifra entra en un texto sin verificarla.</p></div>
+  </div>
+  <p class="small">Por API, los proveedores no usan tus datos para entrenar por defecto, pero el texto sí sale de tu equipo.</p>
+</section>
+
+<!-- 22 · ACTO 4 -->
+<section class="slide act">
+  <div class="num">04</div>
+  <p class="kicker">Acto 4</p>
+  <h1>Manos a la obra:<br><em>tu clave</em></h1>
+</section>
+
+<!-- 23 · PASO A PASO -->
+<section class="slide">
+  <p class="kicker">Unos 12 minutos · con tarjeta y móvil a mano</p>
+  <h2>Crea tu clave <em>paso a paso</em></h2>
+  <div class="two">
+    <ol class="steps">
+      <li>Entra en <b>platform.openai.com</b> (no en ChatGPT) y verifica correo y móvil.</li>
+      <li>En <b>Settings → Billing</b>, añade la tarjeta y carga <b>5 $</b>. Deja la recarga automática <b>apagada</b>.</li>
+      <li>En <b>Limits</b>, fija un presupuesto de 5 $ y un aviso a los 4 $.</li>
+      <li>En <b>API keys → Create new secret key</b>, ponle un nombre (p. ej. <code>isabial</code>) y cópiala: <b>solo se muestra una vez</b>.</li>
+      <li>Pégala en una app del curso y lanza una consulta corta para comprobar que responde.</li>
+    </ol>
+    <div style="display:grid;gap:12px">
+      <div class="mock"><div class="bar">platform.openai.com/settings/organization/billing</div>
+        <div class="body"><div class="row"><span>Credit balance <b>$5.00</b></span><span class="btn">Add payment method</span></div>
+        <div class="row"><span><b>Auto recharge</b><br><span style="color:#888;font-size:11px">Déjalo desactivado</span></span><span class="tog"></span></div></div></div>
+      <div class="mock"><div class="bar">platform.openai.com/api-keys</div>
+        <div class="body"><b>Guarda tu clave</b><div class="row"><span class="key">sk-proj-••••••••••••••••••••••••</span><span class="btn">Copiar</span></div>
+        <span style="color:#b33;font-size:11px">No volverás a ver esta clave.</span></div></div>
+      <p class="src">Esquemas: la pantalla real puede diferir en detalles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 24 · SEIS REGLAS -->
+<section class="slide">
+  <p class="kicker">Buenas prácticas</p>
+  <h2>Tu API key: <em>seis reglas</em></h2>
+  <div class="grid3">
+    <div class="card hl"><div class="n">1</div><h3>Es una tarjeta de crédito</h3><p>No la compartas, ni en un correo, ni en un chat, ni en una diapositiva, ni en GitHub.</p></div>
+    <div class="card"><div class="n">2</div><h3>Pon un límite de gasto</h3><p>Tope mensual y alertas en la consola del proveedor.</p></div>
+    <div class="card"><div class="n">3</div><h3>Una clave por proyecto</h3><p>Si se filtra una, la revocas sin romper las demás.</p></div>
+    <div class="card"><div class="n">4</div><h3>Modelo según la tarea</h3><p>Barato por defecto; el potente solo cuando haga falta.</p></div>
+    <div class="card"><div class="n">5</div><h3>Caché y lotes</h3><p>El modo lote rebaja en torno al 50 % y la caché abarata lo repetido.</p></div>
+    <div class="card"><div class="n">6</div><h3>Mide el coste por tarea</h3><p>No el precio por token: un modelo caro que acierta a la primera puede salir más barato.</p></div>
+  </div>
+</section>
+
+<!-- 25 · SI ALGO FALLA -->
+<section class="slide">
+  <p class="kicker">Si algo se atasca</p>
+  <h2>Los cuatro <em>errores típicos</em></h2>
+  <div class="grid2">
+    <div class="card"><h3 class="mono" style="font-size:.95rem">insufficient_quota</h3><p>La clave es correcta pero no hay saldo. Carga los 5 $ en Billing.</p></div>
+    <div class="card"><h3 class="mono" style="font-size:.95rem">incorrect api key provided</h3><p>Casi siempre un espacio pegado al copiar. Borra el campo y pega de nuevo.</p></div>
+    <div class="card"><h3>He perdido la clave</h3><p>No se recupera: bórrala en API keys y crea otra. Es gratis y tarda diez segundos.</p></div>
+    <div class="card"><h3>La tarjeta institucional no pasa</h3><p>Sirve una tarjeta personal, de prepago o un monedero virtual.</p></div>
+  </div>
+</section>
+
+<!-- 26 · VISIÓN -->
+<section class="slide">
+  <div class="two">
+    <figure><img src="img/catalogo.jpg" alt="Portada del catálogo Herramientas IA para la academia: 176 herramientas, 5 categorías, 100 % en el navegador"></figure>
+    <div>
+      <p class="kicker">La idea del curso</p>
+      <h2>Una clave, <em>muchas apps</em></h2>
+      <ul class="clean">
+        <li>Apps web de un solo archivo que funcionan en el navegador, sin instalar nada.</li>
+        <li>Tu clave se queda en tu navegador y nunca pasa por un servidor del curso.</li>
+        <li>Cada app hace una tarea concreta y comprueba con código lo que propone la IA.</li>
+      </ul>
+      <p><a href="https://fborrasumh.github.io/ia/" target="_blank" rel="noopener">fborrasumh.github.io/ia</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 27 · LO QUE VIENE -->
+<section class="slide">
+  <p class="kicker">Lo que viene</p>
+  <h2>Cuatro sesiones, <em>doce apps</em></h2>
+  <div class="shots">
+    <figure><img src="img/doctoralia.jpg" alt="Doctoralia: revisiones del estado del arte con citas verificadas"><figcaption>Sesión 2 · Doctoralia</figcaption></figure>
+    <figure><img src="img/revistafit.jpg" alt="RevistaFit: elegir revista con artículos de OpenAlex como prueba"><figcaption>Sesión 5 · RevistaFit</figcaption></figure>
+    <figure><img src="img/adaptia.jpg" alt="AdaptIA: adaptar el manuscrito a las normas de la revista"><figcaption>Sesión 5 · AdaptIA</figcaption></figure>
+  </div>
+  <p class="small">2 · Evidencia: Publication Radar, Doctoralia, PRISMIA · 3 · Financiación: FronterIA, GrantWriter, SubvencIA · 4 · Del dato al manuscrito: CuadernIA, NarrativIA, RefinIA · 5 · A la revista: RevistaFit, AdaptIA, ArbitrIA</p>
+</section>
+
+<!-- 28 · ENTREGABLE -->
+<section class="slide">
+  <p class="kicker">Entregable de hoy</p>
+  <h2>La ficha de <em>tu proyecto</em></h2>
+  <p class="lead">La usarás en todas las sesiones. Escríbela en un documento tuyo, sin datos identificables.</p>
+  <div class="ficha">
+    <div><b>Pregunta de investigación</b>En una o dos frases.</div>
+    <div><b>Campo y tipo de estudio</b>Área, diseño y población.</div>
+    <div><b>Datos disponibles</b>Qué tienes ya (anonimizado) o qué dataset de ejemplo usarás.</div>
+    <div><b>Convocatoria objetivo</b>Para la sesión 3 de financiación.</div>
+    <div><b>Revista objetivo</b>Si ya tienes alguna en mente.</div>
+    <div><b>Mi clave</b>✓ creada · ✓ 5 $ de saldo · ✓ límite puesto · ✓ probada</div>
+  </div>
+  <p><a href="../">← Volver al portal del curso</a></p>
+</section>
+
+<nav class="nav" aria-label="Navegación de diapositivas">
+  <a class="back" href="../">← Curso</a>
+  <button id="prev" aria-label="Diapositiva anterior">‹</button>
+  <button id="next" aria-label="Diapositiva siguiente">›</button>
+  <span class="count" id="count"></span>
+</nav>
+</div>
+
+<script>
+const slides = [...document.querySelectorAll(".slide")];
+let i = 0;
+function show(n){
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle("on", k === i));
+  slides[i].scrollTop = 0;
+  document.getElementById("count").textContent = (i + 1) + " / " + slides.length;
+  document.getElementById("prog").style.width = ((i + 1) / slides.length * 100) + "%";
+  history.replaceState(null, "", "#" + (i + 1));
+}
+document.getElementById("prev").onclick = () => show(i - 1);
+document.getElementById("next").onclick = () => show(i + 1);
+document.addEventListener("keydown", e => {
+  if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); show(i + 1); }
+  if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(i - 1); }
+  if (e.key === "Home") show(0);
+  if (e.key === "End") show(slides.length - 1);
+});
+let x0 = null;
+document.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+document.addEventListener("touchend", e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0;
+  if (Math.abs(dx) > 60) show(i + (dx < 0 ? 1 : -1));
+  x0 = null;
+});
+show((parseInt(location.hash.slice(1), 10) || 1) - 1);
+</script>
+</body>
+</html>
