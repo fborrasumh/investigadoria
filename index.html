@@ -60,6 +60,29 @@ h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; lette
 .btn { display: inline-flex; align-items: center; gap: 6px; font: 600 13px 'Inter', sans-serif; padding: 7px 14px; border-radius: 99px; text-decoration: none; background: var(--c); color: #fff; }
 .shared { margin-top: 4px; font-size: 14px; color: #555; background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 14px 18px; }
 
+/* FRANJA DE FASES */
+:root { --comp: #b45309; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i.sw { width: 14px; height: 14px; border-radius: 4px; background: var(--c); display: inline-block; }
+.legend i.sw.comp { background: #fff; border: 1.5px dashed var(--comp); }
+.phases-wrap { width: min(1400px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; padding-bottom: 6px; }
+.phases { display: grid; grid-template-columns: repeat(7, minmax(170px, 1fr)); gap: 10px; min-width: 1240px; }
+.phase { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.phase-h { display: flex; align-items: baseline; gap: 8px; padding-bottom: 8px; border-bottom: .5px solid var(--border); }
+.phase-n { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--muted); }
+.phase-t { font-family: 'Sora', sans-serif; font-weight: 700; font-size: .9rem; line-height: 1.25; }
+.chip { display: block; text-decoration: none; border-radius: 10px; padding: 9px 11px; font-size: 12.5px; line-height: 1.35; position: relative; }
+.chip b { display: block; font-family: 'Sora', sans-serif; font-size: 13.5px; margin-bottom: 2px; padding-right: 34px; }
+.chip .tag { position: absolute; top: 8px; right: 8px; font-size: 10px; font-weight: 600; letter-spacing: .04em; border-radius: 99px; padding: 1px 6px; }
+.chip.ses { background: var(--c); color: #fff; }
+.chip.ses .tag { background: rgba(255,255,255,.22); }
+.chip.comp { background: #fff; border: 1.5px dashed var(--comp); color: #444; }
+.chip.comp b { color: var(--comp); }
+.chip.comp .tag { background: #fdf3e7; color: var(--comp); }
+.chip:hover { filter: brightness(.95); }
+.phases-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
 /* SESSIONS */
 .sessions { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; overflow: hidden; }
 .srow { display: grid; grid-template-columns: 56px 1fr 1fr; gap: 16px; padding: 16px 18px; border-bottom: .5px solid var(--border); align-items: start; font-size: 14px; }
@@ -108,6 +131,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   <p class="sub" data-i18n="sub"></p>
   <div class="stats">
     <div><div class="stat-n">12</div><div class="stat-l" data-i18n="stApps"></div></div>
+    <div><div class="stat-n">14</div><div class="stat-l" data-i18n="stComp"></div></div>
     <div><div class="stat-n">5</div><div class="stat-l" data-i18n="stSes"></div></div>
     <div><div class="stat-n">10 h</div><div class="stat-l" data-i18n="stHours"></div></div>
     <div><div class="stat-n">3</div><div class="stat-l" data-i18n="stLangs"></div></div>
@@ -115,6 +139,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 </header>
 
 <nav><div class="in">
+  <a href="#fases" data-i18n="navPhases"></a>
   <a href="#apps" data-i18n="navApps"></a>
   <a href="#curso" data-i18n="navCourse"></a>
   <a href="#clave" data-i18n="navKey"></a>
@@ -122,6 +147,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 </div></nav>
 
 <main>
+  <section id="fases">
+    <h2 data-i18n="phasesH"></h2>
+    <p class="lead" data-i18n="phasesLead"></p>
+    <div class="legend" id="legend"></div>
+    <div class="phases-wrap"><div class="phases" id="phases"></div></div>
+    <p class="phases-note" data-i18n="phasesNote"></p>
+  </section>
+
   <section id="apps">
     <h2 data-i18n="appsH"></h2>
     <p class="lead" data-i18n="appsLead"></p>
@@ -191,6 +224,22 @@ const APPS = [
   { id:"revistafit",        name:"RevistaFit",        ses:5, icon:"ti-target" },
   { id:"adaptia",           name:"AdaptIA",           ses:5, icon:"ti-adjustments" },
   { id:"arbitria",          name:"ArbitrIA",          ses:5, icon:"ti-gavel" }
+];
+/* FRANJA DE FASES: apps del curso (APPS) + complementarias del catálogo fborrasumh.github.io/ia */
+const COMP = {
+  evidentia:"EvidentIA", diaria:"DiarIA", libretia:"LibretIA", kuratia:"Kuratia",
+  extractmetaia:"ExtractMetaIA", metaanalisisia:"MetaAnálisisIA", coscientia:"CoScientIA",
+  figuria:"FigurIA", manuscritia:"ManuscritIA", procedencia:"ProcedencIA",
+  peerresponse_ai:"PeerResponse AI", posteria:"PosterIA", esquemia:"EsquemIA", meritoria:"MeritorIA"
+};
+const PHASES = [
+  ["publication_radar","evidentia","diaria"],
+  ["doctoralia","prismia","libretia","kuratia","extractmetaia","metaanalisisia"],
+  ["fronteria","coscientia","grantwriter","subvencia"],
+  ["cuadernia","figuria","narrativia"],
+  ["manuscritia","refinia","procedencia"],
+  ["revistafit","adaptia","arbitria","peerresponse_ai"],
+  ["posteria","esquemia","meritoria"]
 ];
 const SES_COLOR = { 1:"--text", 2:"--s2", 3:"--s3", 4:"--s4", 5:"--s5" };
 const LANGS = ["es","en","pt"];
@@ -266,7 +315,17 @@ es:{
     "Las puntuaciones y revisiones simuladas (SubvencIA, GrantWriter, ArbitrIA) orientan, pero no predicen la evaluación real."
   ],
   footOrg:"Curso «Herramientas de IA para la investigación» · Formación ISABIAL · Instituto de Investigación Sanitaria y Biomédica de Alicante",
-  footDev:"Desarrollo:", footLic:"Licencia MIT"
+  footDev:"Desarrollo:", footLic:"Licencia MIT",
+  stComp:"complementarias",
+  navPhases:"Fases",
+  phasesH:"Las apps en cada fase de la investigación",
+  phasesLead:"Las doce apps del curso y catorce apps complementarias del catálogo, ordenadas según la fase de la investigación en la que se usan.",
+  legSes:"Sesión",
+  legComp:"Complementaria",
+  tagComp:"+",
+  phasesNote:"Las complementarias no forman parte de las sesiones: sirven para ampliar cada fase por tu cuenta. Siguen las mismas normas de uso; revisa en cada una qué proveedor de IA admite.",
+  phases:["Pregunta y vigilancia", "Evidencia y síntesis", "Idea y financiación", "Datos y resultados", "Redacción e integridad", "Publicación", "Difusión y carrera"],
+  short:{"publication_radar": "Revistas que publican tu tema y sus artículos nuevos", "evidentia": "Pregunta PICO y búsqueda reproducible con MeSH verificados", "diaria": "Tu artículo del día en podcast, con citas comprobadas", "doctoralia": "Estado del arte con citas verificadas y PRISMA", "prismia": "Revisión sistemática con dos revisores de IA y un árbitro", "libretia": "Pregunta a tus fuentes y recibe la cita del pasaje exacto", "kuratia": "Valora y prioriza artículos en 16 dimensiones", "extractmetaia": "Extracción de datos para meta-análisis con confirmación humana", "metaanalisisia": "Forest plot, funnel, Egger y GRADE en el navegador", "fronteria": "De la pregunta a la propuesta, con la novedad contrastada", "coscientia": "Generación evolutiva de hipótesis (Co-Scientist)", "grantwriter": "Memoria para convocatorias de I+D+i", "subvencia": "Puntúa el proyecto con la rúbrica y lo mejora", "cuadernia": "De los datos a un cuaderno Jupyter de análisis", "figuria": "Figuras matplotlib listas para publicar", "narrativia": "Del cuaderno ejecutado a la sección de Resultados", "manuscritia": "Redacción en LaTeX con referencias de DOI comprobado", "refinia": "Verificación del manuscrito antes del envío", "procedencia": "Trazabilidad sellada del uso de IA en el manuscrito", "revistafit": "Elegir revista con evidencia y carta de presentación", "adaptia": "Adaptar el manuscrito a las normas de la revista", "arbitria": "Simulacro de revisión por pares", "peerresponse_ai": "Respuesta argumentada a los revisores", "posteria": "Del artículo al póster de congreso", "esquemia": "Graphical abstracts y diagramas CONSORT/PRISMA", "meritoria": "Memoria de aportaciones para el sexenio"}
 },
 en:{
   eyebrow:"Course · ISABIAL Training",
@@ -338,7 +397,17 @@ en:{
     "Simulated scores and reviews (SubvencIA, GrantWriter, ArbitrIA) give guidance but do not predict the real evaluation."
   ],
   footOrg:"Course «AI tools for research» · ISABIAL Training · Alicante Institute for Health and Biomedical Research",
-  footDev:"Development:", footLic:"MIT License"
+  footDev:"Development:", footLic:"MIT License",
+  stComp:"complementary",
+  navPhases:"Phases",
+  phasesH:"The apps at each stage of research",
+  phasesLead:"The twelve course apps and fourteen complementary apps from the catalogue, arranged by the research stage in which they are used.",
+  legSes:"Session",
+  legComp:"Complementary",
+  tagComp:"+",
+  phasesNote:"The complementary apps are not part of the sessions: use them to go further in each stage on your own. The same rules of use apply; check which AI provider each one supports.",
+  phases:["Question and monitoring", "Evidence and synthesis", "Idea and funding", "Data and results", "Writing and integrity", "Publication", "Dissemination and career"],
+  short:{"publication_radar": "Journals that publish on your topic and their new articles", "evidentia": "PICO question and reproducible search with verified MeSH terms", "diaria": "Your paper of the day as a podcast, with checked quotes", "doctoralia": "State of the art with verified citations and PRISMA", "prismia": "Systematic review with two AI reviewers and an arbiter", "libretia": "Ask your sources and get the exact passage cited", "kuratia": "Rate and prioritise papers across 16 dimensions", "extractmetaia": "Data extraction for meta-analysis with human confirmation", "metaanalisisia": "Forest plot, funnel, Egger and GRADE in the browser", "fronteria": "From question to proposal, with checked novelty", "coscientia": "Evolutionary hypothesis generation (Co-Scientist)", "grantwriter": "Proposals for R&D calls", "subvencia": "Scores the project against the rubric and improves it", "cuadernia": "From data to a Jupyter analysis notebook", "figuria": "Publication-ready matplotlib figures", "narrativia": "From the executed notebook to the Results section", "manuscritia": "LaTeX writing with DOI-checked references", "refinia": "Manuscript verification before submission", "procedencia": "Sealed provenance of AI use in the manuscript", "revistafit": "Evidence-based journal choice and cover letter", "adaptia": "Adapt the manuscript to the journal's guidelines", "arbitria": "Mock peer review", "peerresponse_ai": "Reasoned response to reviewers", "posteria": "From paper to conference poster", "esquemia": "Graphical abstracts and CONSORT/PRISMA diagrams", "meritoria": "Research assessment dossier for the sexenio"}
 },
 pt:{
   eyebrow:"Curso · Formação ISABIAL",
@@ -410,7 +479,17 @@ pt:{
     "As pontuações e revisões simuladas (SubvencIA, GrantWriter, ArbitrIA) orientam, mas não preveem a avaliação real."
   ],
   footOrg:"Curso «Ferramentas de IA para a investigação» · Formação ISABIAL · Instituto de Investigação Sanitária e Biomédica de Alicante",
-  footDev:"Desenvolvimento:", footLic:"Licença MIT"
+  footDev:"Desenvolvimento:", footLic:"Licença MIT",
+  stComp:"complementares",
+  navPhases:"Fases",
+  phasesH:"As apps em cada fase da investigação",
+  phasesLead:"As doze apps do curso e catorze apps complementares do catálogo, ordenadas segundo a fase da investigação em que se usam.",
+  legSes:"Sessão",
+  legComp:"Complementar",
+  tagComp:"+",
+  phasesNote:"As complementares não fazem parte das sessões: servem para aprofundar cada fase por conta própria. Aplicam-se as mesmas normas de utilização; verifica em cada uma que fornecedor de IA admite.",
+  phases:["Pergunta e vigilância", "Evidência e síntese", "Ideia e financiamento", "Dados e resultados", "Redação e integridade", "Publicação", "Divulgação e carreira"],
+  short:{"publication_radar": "Revistas que publicam o teu tema e os seus artigos novos", "evidentia": "Pergunta PICO e pesquisa reprodutível com MeSH verificados", "diaria": "O teu artigo do dia em podcast, com citações verificadas", "doctoralia": "Estado da arte com citações verificadas e PRISMA", "prismia": "Revisão sistemática com dois revisores de IA e um árbitro", "libretia": "Pergunta às tuas fontes e recebe a citação do passo exato", "kuratia": "Avalia e prioriza artigos em 16 dimensões", "extractmetaia": "Extração de dados para meta-análise com confirmação humana", "metaanalisisia": "Forest plot, funnel, Egger e GRADE no navegador", "fronteria": "Da pergunta à proposta, com a novidade contrastada", "coscientia": "Geração evolutiva de hipóteses (Co-Scientist)", "grantwriter": "Candidaturas a concursos de I&D&I", "subvencia": "Pontua o projeto com a rubrica e melhora-o", "cuadernia": "Dos dados a um caderno Jupyter de análise", "figuria": "Figuras matplotlib prontas a publicar", "narrativia": "Do caderno executado à secção de Resultados", "manuscritia": "Redação em LaTeX com referências de DOI verificado", "refinia": "Verificação do manuscrito antes da submissão", "procedencia": "Rastreabilidade selada do uso de IA no manuscrito", "revistafit": "Escolher revista com evidência e carta de apresentação", "adaptia": "Adaptar o manuscrito às normas da revista", "arbitria": "Simulação de revisão por pares", "peerresponse_ai": "Resposta fundamentada aos revisores", "posteria": "Do artigo ao póster de congresso", "esquemia": "Graphical abstracts e diagramas CONSORT/PRISMA", "meritoria": "Memória de contributos para o sexénio"}
 }
 };
 
@@ -424,6 +503,20 @@ function render(){
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = L[el.dataset.i18n]; });
   document.querySelectorAll("[data-i18n-html]").forEach(el => { el.innerHTML = L[el.dataset.i18nHtml]; });
   document.querySelectorAll("#langs button").forEach(b => b.classList.toggle("active", b.dataset.l === lang));
+
+  document.getElementById("legend").innerHTML =
+    [2,3,4,5].map(n => `<span style="--c:var(${SES_COLOR[n]})"><i class="sw"></i>${esc(L.legSes)} ${n}</span>`).join("") +
+    `<span><i class="sw comp"></i>${esc(L.legComp)}</span>`;
+  document.getElementById("phases").innerHTML = PHASES.map((ids, i) => `<div class="phase">
+      <div class="phase-h"><span class="phase-n">${i+1}</span><span class="phase-t">${esc(L.phases[i])}</span></div>
+      ${ids.map(id => {
+        const a = APPS.find(x => x.id === id);
+        const url = `https://fborrasumh.github.io/${id}/`;
+        return a
+          ? `<a class="chip ses" style="--c:var(${SES_COLOR[a.ses]})" href="${url}" target="_blank" rel="noopener"><span class="tag">S${a.ses}</span><b>${esc(a.name)}</b>${esc(L.short[id])}</a>`
+          : `<a class="chip comp" href="${url}" target="_blank" rel="noopener"><span class="tag">${esc(L.tagComp)}</span><b>${esc(COMP[id])}</b>${esc(L.short[id])}</a>`;
+      }).join("")}
+    </div>`).join("");
 
   document.getElementById("groups").innerHTML = [2,3,4,5].map(n => {
     const cards = APPS.filter(a => a.ses === n).map(a => {
