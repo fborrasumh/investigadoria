@@ -82,6 +82,10 @@ h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; lette
 .chip.comp .tag { background: #fdf3e7; color: var(--comp); }
 .chip:hover { filter: brightness(.95); }
 .phases-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+.vs-h { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 800; margin-bottom: 12px; }
+.vs .box.api { border: 1.5px solid var(--accent); }
+.vs .box.api h3 { color: var(--accent); }
+.vs-note { margin: 10px 0 26px; }
 
 /* SESSIONS */
 .sessions { background: var(--surface); border: .5px solid var(--border); border-radius: 12px; overflow: hidden; }
@@ -150,6 +154,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   <section id="fases">
     <h2 data-i18n="phasesH"></h2>
     <p class="lead" data-i18n="phasesLead"></p>
+    <h3 class="vs-h" data-i18n="vsH"></h3>
+    <div class="cols vs">
+      <div class="box">
+        <h3><i class="ti ti-message-circle"></i> <span data-i18n="chatH"></span></h3>
+        <ul id="chatL"></ul>
+      </div>
+      <div class="box api">
+        <h3><i class="ti ti-key"></i> <span data-i18n="apiH"></span></h3>
+        <ul id="apiL"></ul>
+      </div>
+    </div>
+    <p class="phases-note vs-note" data-i18n="vsNote"></p>
     <div class="legend" id="legend"></div>
     <div class="phases-wrap"><div class="phases" id="phases"></div></div>
     <p class="phases-note" data-i18n="phasesNote"></p>
@@ -323,6 +339,12 @@ es:{
   legSes:"Sesión",
   legComp:"Complementaria",
   tagComp:"+",
+  vsH:"¿Por qué usar tu clave de API y no el chatbot con suscripción mensual?",
+  chatH:"Chatbot con suscripción mensual (ChatGPT, Gemini, Claude)",
+  chat:["Cuota fija al mes por cada proveedor, la uses mucho o poco.", "Un proveedor por suscripción: comparar o combinar modelos exige pagar varias.", "Conversación abierta: la calidad depende de cómo preguntes y el resultado cambia de una vez a otra.", "Las referencias, cifras y cálculos que devuelve los tienes que comprobar tú a mano.", "Las tareas largas (una revisión, una memoria completa) se hacen pregunta a pregunta, copiando y pegando.", "En los planes de consumo, las conversaciones pueden usarse para entrenar modelos según la configuración de tu cuenta."],
+  apiH:"Clave de API en estas apps",
+  api:["Pagas solo lo que usas, por tokens: la mayoría de tareas cuestan céntimos, con un límite de gasto que fijas tú.", "Eliges proveedor y modelo en cada tarea; PRISMIA usa tres proveedores a la vez para cribar a ciegas y arbitrar.", "Flujo fijo y reproducible: los mismos pasos, las mismas instrucciones y el modelo que elegiste quedan registrados.", "La IA propone y el código comprueba: citas contrastadas en OpenAlex y PubMed, estadística calculada y cifras auditadas.", "Equipos de agentes trabajan en paralelo (nueve en GrantWriter, cinco revisores en ArbitrIA) y entregan documentos completos.", "Por API los datos no se usan para entrenar por defecto, y la clave se guarda solo en tu navegador."],
+  vsNote:"Son complementarios: el chatbot va bien para explorar y conversar; las apps con clave, para producir entregables verificables. La suscripción al chatbot no incluye el uso de la API, que se factura aparte en la plataforma de desarrolladores de cada proveedor.",
   phasesNote:"Las complementarias no forman parte de las sesiones: sirven para ampliar cada fase por tu cuenta. Siguen las mismas normas de uso; revisa en cada una qué proveedor de IA admite.",
   phases:["Pregunta y vigilancia", "Evidencia y síntesis", "Idea y financiación", "Datos y resultados", "Redacción e integridad", "Publicación", "Difusión y carrera"],
   short:{"publication_radar": "Revistas que publican tu tema y sus artículos nuevos", "evidentia": "Pregunta PICO y búsqueda reproducible con MeSH verificados", "diaria": "Tu artículo del día en podcast, con citas comprobadas", "doctoralia": "Estado del arte con citas verificadas y PRISMA", "prismia": "Revisión sistemática con dos revisores de IA y un árbitro", "libretia": "Pregunta a tus fuentes y recibe la cita del pasaje exacto", "kuratia": "Valora y prioriza artículos en 16 dimensiones", "extractmetaia": "Extracción de datos para meta-análisis con confirmación humana", "metaanalisisia": "Forest plot, funnel, Egger y GRADE en el navegador", "fronteria": "De la pregunta a la propuesta, con la novedad contrastada", "coscientia": "Generación evolutiva de hipótesis (Co-Scientist)", "grantwriter": "Memoria para convocatorias de I+D+i", "subvencia": "Puntúa el proyecto con la rúbrica y lo mejora", "cuadernia": "De los datos a un cuaderno Jupyter de análisis", "figuria": "Figuras matplotlib listas para publicar", "narrativia": "Del cuaderno ejecutado a la sección de Resultados", "manuscritia": "Redacción en LaTeX con referencias de DOI comprobado", "refinia": "Verificación del manuscrito antes del envío", "procedencia": "Trazabilidad sellada del uso de IA en el manuscrito", "revistafit": "Elegir revista con evidencia y carta de presentación", "adaptia": "Adaptar el manuscrito a las normas de la revista", "arbitria": "Simulacro de revisión por pares", "peerresponse_ai": "Respuesta argumentada a los revisores", "posteria": "Del artículo al póster de congreso", "esquemia": "Graphical abstracts y diagramas CONSORT/PRISMA", "meritoria": "Memoria de aportaciones para el sexenio"}
@@ -405,6 +427,12 @@ en:{
   legSes:"Session",
   legComp:"Complementary",
   tagComp:"+",
+  vsH:"Why use your own API key rather than a monthly chatbot subscription?",
+  chatH:"Chatbot with a monthly subscription (ChatGPT, Gemini, Claude)",
+  chat:["A fixed monthly fee per provider, whether you use it a lot or a little.", "One provider per subscription: comparing or combining models means paying for several.", "Open conversation: quality depends on how you ask and results vary from one time to the next.", "You have to check the references, figures and calculations it returns by hand.", "Long tasks (a review, a full proposal) are done question by question, copying and pasting.", "On consumer plans, conversations may be used to train models depending on your account settings."],
+  apiH:"API key in these apps",
+  api:["You pay only for what you use, per token: most tasks cost cents, with a spending limit you set.", "You choose provider and model for each task; PRISMIA uses three providers at once to screen blindly and arbitrate.", "A fixed, reproducible workflow: the same steps, the same instructions and the model you chose are recorded.", "The AI proposes and the code checks: citations checked against OpenAlex and PubMed, statistics computed and figures audited.", "Teams of agents work in parallel (nine in GrantWriter, five reviewers in ArbitrIA) and deliver complete documents.", "Through the API, data is not used for training by default, and the key is stored only in your browser."],
+  vsNote:"They are complementary: the chatbot is good for exploring and conversing; the apps with a key, for producing verifiable deliverables. A chatbot subscription does not include API usage, which is billed separately on each provider's developer platform.",
   phasesNote:"The complementary apps are not part of the sessions: use them to go further in each stage on your own. The same rules of use apply; check which AI provider each one supports.",
   phases:["Question and monitoring", "Evidence and synthesis", "Idea and funding", "Data and results", "Writing and integrity", "Publication", "Dissemination and career"],
   short:{"publication_radar": "Journals that publish on your topic and their new articles", "evidentia": "PICO question and reproducible search with verified MeSH terms", "diaria": "Your paper of the day as a podcast, with checked quotes", "doctoralia": "State of the art with verified citations and PRISMA", "prismia": "Systematic review with two AI reviewers and an arbiter", "libretia": "Ask your sources and get the exact passage cited", "kuratia": "Rate and prioritise papers across 16 dimensions", "extractmetaia": "Data extraction for meta-analysis with human confirmation", "metaanalisisia": "Forest plot, funnel, Egger and GRADE in the browser", "fronteria": "From question to proposal, with checked novelty", "coscientia": "Evolutionary hypothesis generation (Co-Scientist)", "grantwriter": "Proposals for R&D calls", "subvencia": "Scores the project against the rubric and improves it", "cuadernia": "From data to a Jupyter analysis notebook", "figuria": "Publication-ready matplotlib figures", "narrativia": "From the executed notebook to the Results section", "manuscritia": "LaTeX writing with DOI-checked references", "refinia": "Manuscript verification before submission", "procedencia": "Sealed provenance of AI use in the manuscript", "revistafit": "Evidence-based journal choice and cover letter", "adaptia": "Adapt the manuscript to the journal's guidelines", "arbitria": "Mock peer review", "peerresponse_ai": "Reasoned response to reviewers", "posteria": "From paper to conference poster", "esquemia": "Graphical abstracts and CONSORT/PRISMA diagrams", "meritoria": "Research assessment dossier for the sexenio"}
@@ -487,6 +515,12 @@ pt:{
   legSes:"Sessão",
   legComp:"Complementar",
   tagComp:"+",
+  vsH:"Porquê usar a tua chave de API e não o chatbot com subscrição mensal?",
+  chatH:"Chatbot com subscrição mensal (ChatGPT, Gemini, Claude)",
+  chat:["Mensalidade fixa por cada fornecedor, quer o uses muito ou pouco.", "Um fornecedor por subscrição: comparar ou combinar modelos obriga a pagar várias.", "Conversa aberta: a qualidade depende de como perguntas e o resultado muda de uma vez para outra.", "As referências, números e cálculos que devolve tens de os verificar tu à mão.", "As tarefas longas (uma revisão, uma candidatura completa) fazem-se pergunta a pergunta, a copiar e colar.", "Nos planos de consumo, as conversas podem ser usadas para treinar modelos segundo a configuração da tua conta."],
+  apiH:"Chave de API nestas apps",
+  api:["Pagas apenas o que usas, por tokens: a maioria das tarefas custa cêntimos, com um limite de gastos que defines tu.", "Escolhes fornecedor e modelo em cada tarefa; o PRISMIA usa três fornecedores ao mesmo tempo para fazer a triagem às cegas e arbitrar.", "Fluxo fixo e reprodutível: os mesmos passos, as mesmas instruções e o modelo que escolheste ficam registados.", "A IA propõe e o código verifica: citações contrastadas no OpenAlex e no PubMed, estatística calculada e números auditados.", "Equipas de agentes trabalham em paralelo (nove no GrantWriter, cinco revisores no ArbitrIA) e entregam documentos completos.", "Por API os dados não são usados para treino por defeito, e a chave fica guardada apenas no teu navegador."],
+  vsNote:"São complementares: o chatbot serve para explorar e conversar; as apps com chave, para produzir resultados verificáveis. A subscrição do chatbot não inclui o uso da API, que é faturado à parte na plataforma de programadores de cada fornecedor.",
   phasesNote:"As complementares não fazem parte das sessões: servem para aprofundar cada fase por conta própria. Aplicam-se as mesmas normas de utilização; verifica em cada uma que fornecedor de IA admite.",
   phases:["Pergunta e vigilância", "Evidência e síntese", "Ideia e financiamento", "Dados e resultados", "Redação e integridade", "Publicação", "Divulgação e carreira"],
   short:{"publication_radar": "Revistas que publicam o teu tema e os seus artigos novos", "evidentia": "Pergunta PICO e pesquisa reprodutível com MeSH verificados", "diaria": "O teu artigo do dia em podcast, com citações verificadas", "doctoralia": "Estado da arte com citações verificadas e PRISMA", "prismia": "Revisão sistemática com dois revisores de IA e um árbitro", "libretia": "Pergunta às tuas fontes e recebe a citação do passo exato", "kuratia": "Avalia e prioriza artigos em 16 dimensões", "extractmetaia": "Extração de dados para meta-análise com confirmação humana", "metaanalisisia": "Forest plot, funnel, Egger e GRADE no navegador", "fronteria": "Da pergunta à proposta, com a novidade contrastada", "coscientia": "Geração evolutiva de hipóteses (Co-Scientist)", "grantwriter": "Candidaturas a concursos de I&D&I", "subvencia": "Pontua o projeto com a rubrica e melhora-o", "cuadernia": "Dos dados a um caderno Jupyter de análise", "figuria": "Figuras matplotlib prontas a publicar", "narrativia": "Do caderno executado à secção de Resultados", "manuscritia": "Redação em LaTeX com referências de DOI verificado", "refinia": "Verificação do manuscrito antes da submissão", "procedencia": "Rastreabilidade selada do uso de IA no manuscrito", "revistafit": "Escolher revista com evidência e carta de apresentação", "adaptia": "Adaptar o manuscrito às normas da revista", "arbitria": "Simulação de revisão por pares", "peerresponse_ai": "Resposta fundamentada aos revisores", "posteria": "Do artigo ao póster de congresso", "esquemia": "Graphical abstracts e diagramas CONSORT/PRISMA", "meritoria": "Memória de contributos para o sexénio"}
@@ -541,7 +575,7 @@ function render(){
     </div>`).join("");
 
   const list = (id, arr) => { document.getElementById(id).innerHTML = arr.map(x => `<li>${esc(x)}</li>`).join(""); };
-  list("keySteps", L.keySteps); list("keyChoose", L.keyChoose); list("priv", L.priv); list("eth", L.eth);
+  list("chatL", L.chat); list("apiL", L.api); list("keySteps", L.keySteps); list("keyChoose", L.keyChoose); list("priv", L.priv); list("eth", L.eth);
 }
 
 function setLang(l){
