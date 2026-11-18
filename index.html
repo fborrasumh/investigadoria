@@ -103,9 +103,6 @@ h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800; lette
 .box h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
 ol, ul { padding-left: 20px; font-size: 14px; color: #444; }
 li { margin-bottom: 7px; }
-.prov { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.prov a { font-size: 13px; text-decoration: none; border: .5px solid var(--border-strong); border-radius: 99px; padding: 5px 12px; color: var(--text); background: #faf9f7; }
-.prov a:hover { border-color: var(--accent); }
 
 /* FOOTER */
 footer { background: var(--surface); border-top: .5px solid var(--border); padding: 28px 24px; text-align: center; font-size: 13px; color: var(--muted); }
@@ -120,6 +117,55 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   .lang-toggle { top: 10px; right: 10px; }
   .lang-toggle button { padding: 6px 8px; }
   header { padding-top: 64px; }
+}
+
+/* CLAVE DE IA: explicada desde cero y elección de modelo (adaptado de fborrasumh.github.io/oraculo/#clave) */
+.kx{--kx-ink:var(--text,#1a1916);--kx-acc:var(--accent,#1a4fd8);--kx-surf:var(--surface,#fff);--kx-line:var(--border,#e4e3df);--kx-muted:var(--muted,#7a7872);--kx-bg:var(--bg,#f7f7f5);--kx-head:'Sora',sans-serif;color:var(--kx-ink)}
+.kx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kx h3{font-family:var(--kx-head);font-size:1.15rem;font-weight:800;margin:0 0 10px;color:var(--kx-ink)}
+.kx-what{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;margin-bottom:34px}
+.kx-what p{font-size:15px;margin:0 0 10px}
+.kx-need{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:18px 20px;align-self:start}
+.kx-need ul{margin:0;padding-left:20px;font-size:14px;color:inherit}
+.kx-need li{margin-bottom:6px}
+.kx-tabs{display:inline-flex;flex-wrap:wrap;border:1.5px solid var(--kx-ink);border-radius:10px;overflow:hidden;margin:0 0 14px;background:var(--kx-surf)}
+.kx-tabs button{font:600 14px/1 inherit;font-family:inherit;padding:11px 16px;border:0;background:none;color:var(--kx-ink);cursor:pointer}
+.kx-tabs button+button{border-left:1.5px solid var(--kx-ink)}
+.kx-tabs button[aria-selected=true],.kx-tabs button[aria-pressed=true]{background:var(--kx-ink);color:var(--kx-surf)}
+.kx-tabs small{font-weight:400;opacity:.8}
+.kx-guide{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:6px 22px 18px;margin-bottom:44px}
+.kx-guide ol{list-style:none;margin:0;padding:0;counter-reset:kxp;color:inherit}
+.kx-guide li{counter-increment:kxp;display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;align-items:start;padding:12px 0;margin:0;border-bottom:1px solid var(--kx-line);font-size:14.5px}
+.kx-guide li::before{content:counter(kxp);width:30px;height:30px;border-radius:50%;border:1.5px solid var(--kx-ink);display:grid;place-items:center;font:800 .9rem/1 var(--kx-head)}
+.kx-go{display:inline-block;margin-top:14px;font-weight:600;color:var(--kx-acc)}
+.kx code{background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;font-size:.92em}
+.kx-models>p{font-size:15px;max-width:52em;margin:0 0 14px}
+.kx-ladder{position:relative;padding-top:96px}
+.kx-arc{position:absolute;top:22px;left:12%;right:11%;height:70px;border:2.5px solid var(--kx-ink);border-bottom:0;border-radius:50% 50% 0 0/100% 100% 0 0;pointer-events:none}
+.kx-arc::after{content:"";position:absolute;right:-9px;bottom:-12px;border:8px solid transparent;border-top:12px solid var(--kx-ink);border-bottom:0}
+.kx-x{position:absolute;top:0;left:50%;transform:translateX(-50%);font:900 1.9rem/1 var(--kx-head);background:var(--kx-bg);padding:0 10px}
+.kx-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end}
+.kx-step{display:flex;flex-direction:column;padding:18px;border-radius:12px;border:1.5px solid var(--kx-ink);background:var(--kx-surf)}
+.kx-step:nth-child(1){min-height:215px;background:var(--kx-bg)}
+.kx-step:nth-child(2){min-height:250px}
+.kx-step:nth-child(3){min-height:285px;background:var(--kx-acc);border-color:var(--kx-acc);color:#fff}
+.kx-step:nth-child(4){min-height:320px;background:var(--kx-ink);color:var(--kx-surf)}
+.kx-step h4{font-family:var(--kx-head);font-size:1.1rem;font-weight:800;margin:0 0 6px}
+.kx-step p{font-size:13.5px;margin:0;color:inherit}
+.kx-price{margin-top:auto;padding-top:14px;font:800 1.6rem/1 var(--kx-head);font-variant-numeric:tabular-nums}
+.kx-step small{display:block;margin-top:5px;font-size:12px;opacity:.85}
+.kx-step em{display:block;margin-top:7px;font-size:12px;opacity:.85}
+.kx-foot{margin:12px 0 0;font-size:12.5px;color:var(--kx-muted)}
+.kx-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.kx-trio>div{background:var(--kx-surf);border:1px solid var(--kx-line);border-radius:12px;padding:18px 20px}
+.kx-trio p{font-size:14px;margin:0}
+.kx a:focus-visible,.kx button:focus-visible{outline:2px solid var(--kx-acc);outline-offset:2px}
+@media (max-width:760px){
+  .kx-what,.kx-trio{grid-template-columns:1fr}
+  .kx-steps{grid-template-columns:1fr 1fr}
+  .kx-step{min-height:0!important}
+  .kx-ladder{padding-top:0}
+  .kx-arc,.kx-x{display:none}
 }
 </style>
 </head>
@@ -181,25 +227,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
     <div class="sessions" id="sessions"></div>
   </section>
 
-  <section id="clave">
-    <h2 data-i18n="keyH"></h2>
-    <p class="lead" data-i18n="keyLead"></p>
-    <div class="cols">
-      <div class="box">
-        <h3><i class="ti ti-key"></i> <span data-i18n="keyStepsH"></span></h3>
-        <ol id="keySteps"></ol>
-        <div class="prov">
-          <a href="https://platform.openai.com/" target="_blank" rel="noopener">OpenAI</a>
-          <a href="https://aistudio.google.com/" target="_blank" rel="noopener">Google Gemini</a>
-          <a href="https://console.anthropic.com/" target="_blank" rel="noopener">Anthropic Claude</a>
-        </div>
-      </div>
-      <div class="box">
-        <h3><i class="ti ti-scale"></i> <span data-i18n="keyChooseH"></span></h3>
-        <ul id="keyChoose"></ul>
-      </div>
-    </div>
-  </section>
+  <section id="clave"><div class="kx" id="kx"></div></section>
 
   <section id="normas">
     <h2 data-i18n="rulesH"></h2>
@@ -292,24 +320,6 @@ es:{
     { t:"Del dato al manuscrito", a:"CuadernIA · NarrativIA · RefinIA", o:"Cuaderno ejecutado, sección de Resultados con las cifras auditadas e informe de verificación del manuscrito." },
     { t:"Del manuscrito a la revista", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Revista elegida con su carta de presentación, manuscrito adaptado a sus normas, simulacro de revisión con hoja de ruta y presentación final ante el grupo." }
   ],
-  keyH:"Tu clave de IA",
-  keyLead:"Las apps usan la API del proveedor con tu propia clave. La clave se guarda solo en tu navegador y nunca pasa por un servidor del curso.",
-  keyStepsH:"Crear la clave con límite de gasto",
-  keySteps:[
-    "Crea una cuenta en la plataforma de desarrolladores del proveedor (en el curso, platform.openai.com).",
-    "Añade un método de pago y fija un límite de gasto mensual bajo antes de crear la clave.",
-    "Crea una clave de API, cópiala y guárdala en un lugar seguro: no se vuelve a mostrar.",
-    "Pégala en la app, carga la lista de modelos disponibles para tu clave y elige uno económico.",
-    "PRISMIA pide un proveedor distinto para cada revisor; si solo tienes la clave de OpenAI, sigue la sesión con su ejemplo, que no necesita clave.",
-    "Si la clave se expone, revócala en la plataforma y crea otra."
-  ],
-  keyChooseH:"Cómo elegir modelo",
-  keyChoose:[
-    "Capacidad: los modelos grandes razonan mejor; los pequeños bastan para redactar y resumir.",
-    "Coste: se paga por tokens (precio por millón); una memoria completa de GrantWriter cuesta céntimos.",
-    "Ventana de contexto: cuánto texto cabe en una petición; 1.000 tokens equivalen a unas 2 o 3 páginas.",
-    "Privacidad: el uso por API no se emplea para entrenar por defecto, pero los datos de salud son categoría especial del RGPD y no deben enviarse identificables."
-  ],
   rulesH:"Normas de uso",
   rulesLead:"Se aplican en todas las sesiones y en todas las apps.",
   privH:"Protección de datos",
@@ -379,24 +389,6 @@ en:{
     { t:"Project funding", a:"FronterIA · GrantWriter · SubvencIA", o:"Proposal with checked novelty and a project for a real call, scored against its rubric and with the cycle report." },
     { t:"From data to manuscript", a:"CuadernIA · NarrativIA · RefinIA", o:"Executed notebook, Results section with audited figures and manuscript verification report." },
     { t:"From manuscript to journal", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Chosen journal with its cover letter, manuscript adapted to its guidelines, mock review with a roadmap and final presentation to the group." }
-  ],
-  keyH:"Your AI key",
-  keyLead:"The apps use the provider's API with your own key. The key is stored only in your browser and never goes through a course server.",
-  keyStepsH:"Create the key with a spending limit",
-  keySteps:[
-    "Create an account on the provider's developer platform (in the course, platform.openai.com).",
-    "Add a payment method and set a low monthly spending limit before creating the key.",
-    "Create an API key, copy it and store it somewhere safe: it is not shown again.",
-    "Paste it into the app, load the list of models available to your key and choose an inexpensive one.",
-    "PRISMIA asks for a different provider for each reviewer; if you only have an OpenAI key, follow the session with its example, which needs no key.",
-    "If the key is exposed, revoke it on the platform and create another."
-  ],
-  keyChooseH:"How to choose a model",
-  keyChoose:[
-    "Capability: large models reason better; small ones are enough for writing and summarising.",
-    "Cost: you pay per token (price per million); a full GrantWriter proposal costs cents.",
-    "Context window: how much text fits in one request; 1,000 tokens are about 2 or 3 pages.",
-    "Privacy: API use is not used for training by default, but health data is a special category under the GDPR and must not be sent in identifiable form."
   ],
   rulesH:"Rules of use",
   rulesLead:"They apply in every session and every app.",
@@ -468,24 +460,6 @@ pt:{
     { t:"Dos dados ao manuscrito", a:"CuadernIA · NarrativIA · RefinIA", o:"Caderno executado, secção de Resultados com os números auditados e relatório de verificação do manuscrito." },
     { t:"Do manuscrito à revista", a:"RevistaFit · AdaptIA · ArbitrIA", o:"Revista escolhida com a carta de apresentação, manuscrito adaptado às suas normas, simulação de revisão com roteiro e apresentação final ao grupo." }
   ],
-  keyH:"A tua chave de IA",
-  keyLead:"As apps usam a API do fornecedor com a tua própria chave. A chave é guardada apenas no teu navegador e nunca passa por um servidor do curso.",
-  keyStepsH:"Criar a chave com limite de gastos",
-  keySteps:[
-    "Cria uma conta na plataforma de programadores do fornecedor (no curso, platform.openai.com).",
-    "Adiciona um método de pagamento e define um limite de gastos mensal baixo antes de criar a chave.",
-    "Cria uma chave de API, copia-a e guarda-a num lugar seguro: não volta a ser mostrada.",
-    "Cola-a na app, carrega a lista de modelos disponíveis para a tua chave e escolhe um económico.",
-    "O PRISMIA pede um fornecedor diferente para cada revisor; se só tiveres a chave da OpenAI, acompanha a sessão com o seu exemplo, que não precisa de chave.",
-    "Se a chave ficar exposta, revoga-a na plataforma e cria outra."
-  ],
-  keyChooseH:"Como escolher o modelo",
-  keyChoose:[
-    "Capacidade: os modelos grandes raciocinam melhor; os pequenos bastam para redigir e resumir.",
-    "Custo: paga-se por tokens (preço por milhão); uma candidatura completa do GrantWriter custa cêntimos.",
-    "Janela de contexto: quanto texto cabe num pedido; 1.000 tokens equivalem a cerca de 2 ou 3 páginas.",
-    "Privacidade: o uso por API não é utilizado para treino por defeito, mas os dados de saúde são categoria especial do RGPD e não devem ser enviados de forma identificável."
-  ],
   rulesH:"Normas de utilização",
   rulesLead:"Aplicam-se em todas as sessões e em todas as apps.",
   privH:"Proteção de dados",
@@ -523,6 +497,361 @@ pt:{
   short:{"publication_radar": "Revistas que publicam o teu tema e os seus artigos novos", "evidentia": "Pergunta PICO e pesquisa reprodutível com MeSH verificados", "diaria": "O teu artigo do dia em podcast, com citações verificadas", "doctoralia": "Estado da arte com citações verificadas e PRISMA", "prismia": "Revisão sistemática com dois revisores de IA e um árbitro", "libretia": "Pergunta às tuas fontes e recebe a citação do passo exato", "kuratia": "Avalia e prioriza artigos em 16 dimensões", "extractmetaia": "Extração de dados para meta-análise com confirmação humana", "metaanalisisia": "Forest plot, funnel, Egger e GRADE no navegador", "fronteria": "Da pergunta à proposta, com a novidade contrastada", "coscientia": "Geração evolutiva de hipóteses (Co-Scientist)", "grantwriter": "Candidaturas a concursos de I&D&I", "subvencia": "Pontua o projeto com a rubrica e melhora-o", "cuadernia": "Dos dados a um caderno Jupyter de análise", "figuria": "Figuras matplotlib prontas a publicar", "narrativia": "Do caderno executado à secção de Resultados", "manuscritia": "Redação em LaTeX com referências de DOI verificado", "refinia": "Verificação do manuscrito antes da submissão", "procedencia": "Rastreabilidade selada do uso de IA no manuscrito", "revistafit": "Escolher revista com evidência e carta de apresentação", "adaptia": "Adaptar o manuscrito às normas da revista", "arbitria": "Simulação de revisão por pares", "peerresponse_ai": "Resposta fundamentada aos revisores", "posteria": "Do artigo ao póster de congresso", "esquemia": "Graphical abstracts e diagramas CONSORT/PRISMA", "meritoria": "Memória de contributos para o sexénio"}
 }
 };
+
+/* CLAVE DE IA: «explicada desde cero» y «¿Qué modelo elegir?» (adaptado de https://fborrasumh.github.io/oraculo/#clave) */
+const KX_MODELS = {"openai": [["GPT-6 Luna", 0.1, 0.5], ["GPT-6.1 Terra", 1, 5], ["GPT-6.1 Sol", 2, 10], ["GPT-6 Astra", 10, 50]], "gemini": [["Gemini 3.1 Flash-Lite", 0.25, 1.5], ["Gemini 3.8 Flash", 0.75, 3.75], ["Gemini 3.1 Pro", 2, 12], ["Gemini 4 Argon", 4, 20]], "anthropic": [["Claude Haiku 5.5", 0.1, 0.5], ["Claude Sonnet 5.5", 2, 10], ["Claude Opus 5.5", 4, 20], ["Claude Fable 5.1", 10, 50]]};
+const KX_GO = { openai:"https://platform.openai.com/api-keys", gemini:"https://aistudio.google.com/apikey", anthropic:"https://console.anthropic.com/settings/keys" };
+const KX_T = {
+ "es": {
+  "h": "La clave de IA, explicada desde cero",
+  "lead": "Las apps del curso funcionan con tu propia clave. Se consigue en diez minutos y, con un límite de gasto, nunca pagarás más de lo que decidas. La clave se guarda solo en tu navegador y nunca pasa por un servidor del curso.",
+  "whatH": "¿Qué es una clave de API?",
+  "what": [
+   "Es una contraseña larga que te da una empresa de inteligencia artificial (OpenAI, Google o Anthropic) para que una aplicación pueda pedirle trabajo a su modelo en tu nombre. Piensa en ella como una tarjeta de prepago: la app la usa para encargar cada tarea y el proveedor te cobra solo lo que gastes, normalmente céntimos.",
+   "No es lo mismo que una suscripción a ChatGPT o a Claude. Esas cuotas mensuales sirven para chatear en su web y no incluyen el uso por API: la clave se crea y se paga aparte, en la plataforma para desarrolladores de cada empresa."
+  ],
+  "needH": "Qué necesitas",
+  "need": [
+   "Una cuenta en la plataforma para desarrolladores de un proveedor",
+   "Un crédito de prepago pequeño (unos 5 €) o la capa gratuita de Gemini",
+   "Un límite de gasto mensual, fijado antes de crear la clave",
+   "Diez minutos"
+  ],
+  "tabsAria": "Proveedor de IA",
+  "rec": "recomendado",
+  "steps": {
+   "openai": [
+    "Entra en [[https://platform.openai.com|platform.openai.com]] y crea una cuenta. Es la plataforma para desarrolladores, distinta de ChatGPT, aunque puedes usar el mismo correo.",
+    "En <b>Billing</b>, añade un método de pago y compra un crédito pequeño, por ejemplo 5 €. Es saldo de prepago: cuando se acaba, deja de funcionar sin cobrarte más.",
+    "En <b>Limits</b>, fija un límite de gasto mensual bajo. Así controlas lo que puedes gastar como mucho.",
+    "En <b>API keys</b>, pulsa <b>Create new secret key</b>. Empieza por <code>sk-</code>. Cópiala en ese momento: no se vuelve a mostrar.",
+    "Pégala en la app que vayas a usar y elige OpenAI y un modelo económico. Queda guardada en tu navegador."
+   ],
+   "gemini": [
+    "Entra en [[https://aistudio.google.com/apikey|aistudio.google.com]] con tu cuenta de Google.",
+    "Acepta las condiciones y pulsa <b>Create API key</b>. Google ofrece una capa gratuita con límites de uso, suficiente para probar.",
+    "Copia la clave (empieza por <code>AIza</code>).",
+    "Si la usas mucho, la capa gratuita se queda corta: activa la facturación en Google Cloud y fija un presupuesto con alerta.",
+    "Pégala en la app y elige Google Gemini y un modelo."
+   ],
+   "anthropic": [
+    "Entra en [[https://console.anthropic.com|console.anthropic.com]] y crea una cuenta. Es distinta de la suscripción a Claude.",
+    "En <b>Billing</b>, compra un crédito pequeño de prepago.",
+    "En <b>Limits</b>, fija un límite de gasto mensual.",
+    "En <b>API keys</b>, pulsa <b>Create key</b> y cópiala (empieza por <code>sk-ant-</code>).",
+    "Pégala en la app y elige Anthropic Claude y un modelo."
+   ]
+  },
+  "go": {
+   "openai": "Abrir la página de claves de OpenAI",
+   "gemini": "Abrir Google AI Studio",
+   "anthropic": "Abrir la consola de Anthropic"
+  },
+  "newWin": "abre en nueva ventana",
+  "modelsH": "¿Qué modelo elegir?",
+  "modelsP": "Con la misma clave puedes usar varios modelos, de menor a mayor capacidad. Se paga por <b>tokens</b> (un token es más o menos tres cuartos de palabra): los de <b>entrada</b> son lo que la app envía al modelo y los de <b>salida</b>, lo que el modelo escribe. Entre el más barato y el más caro de un mismo proveedor el precio puede multiplicarse por cien, así que empieza por el económico y sube solo si el resultado no te convence.",
+  "viewAria": "Ver modelos de",
+  "unit": "USD por millón de tokens, entrada / salida",
+  "desc": {
+   "openai": [
+    "Tareas acotadas y de gran volumen",
+    "Uso del ordenador, razonamiento visual y trabajo de oficina",
+    "Equilibrio entre capacidad y coste para programación y trabajo profesional",
+    "El razonamiento y la programación más exigentes"
+   ],
+   "anthropic": [
+    "Rápido y económico, para tareas acotadas y de mucho volumen",
+    "Equilibrio entre capacidad y coste para el trabajo diario",
+    "Razonamiento complejo, programación y tareas largas",
+    "El más capaz disponible al público, para lo más exigente"
+   ],
+   "gemini": [
+    "El más económico, para tareas sencillas y de mucho volumen",
+    "Rápido y equilibrado para el trabajo diario",
+    "Razonamiento complejo y documentos largos",
+    "El modelo más capaz de Google"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Con más de 100.000 tokens de entrada por petición sube a 0,50 / 2,50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Con capa gratuita.",
+    "Con capa gratuita. Precio de lanzamiento hasta el 31 de diciembre; después, 1,50 / 7,50.",
+    "Sin capa gratuita.",
+    "Sin capa gratuita. Desde el 1 de diciembre; hasta entonces, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "Tarifas base de OpenAI, finales de 2026 (fuente: LISDATA).",
+   "anthropic": "Tarifas base publicadas por Anthropic, consultadas el 18 de noviembre de 2026.",
+   "gemini": "Tarifas de pago de la API de Gemini (hasta 200.000 tokens de entrada), consultadas el 18 de noviembre de 2026."
+  },
+  "costH": "¿Cuánto cuesta?",
+  "costP": "Se paga por uso. Con un modelo económico, la mayoría de tareas cuestan céntimos y, con el límite de gasto, nunca pagarás más de lo que hayas decidido.",
+  "safeH": "¿Es seguro?",
+  "safeP": "La clave se guarda solo en tu navegador, nunca en un servidor del curso. Si usas un ordenador compartido, bórrala de la app al terminar.",
+  "leakH": "Si se te escapa",
+  "leakP": "No la pegues en chats, trabajos ni capturas. Si crees que alguien la ha visto, revócala en la web del proveedor y crea otra: la antigua deja de funcionar al momento."
+ },
+ "en": {
+  "h": "Your AI key, explained from scratch",
+  "lead": "The course apps run on your own key. It takes ten minutes to get one and, with a spending limit, you will never pay more than you decide. The key is stored only in your browser and never passes through a course server.",
+  "whatH": "What is an API key?",
+  "what": [
+   "It is a long password that an artificial intelligence company (OpenAI, Google or Anthropic) gives you so that an application can ask its model to do work on your behalf. Think of it as a prepaid card: the app uses it to commission each task and the provider charges you only for what you use, usually a few cents.",
+   "It is not the same as a ChatGPT or Claude subscription. Those monthly fees are for chatting on their website and do not include API usage: the key is created and paid for separately, on each company's developer platform."
+  ],
+  "needH": "What you need",
+  "need": [
+   "An account on a provider's developer platform",
+   "A small prepaid credit (about €5) or Gemini's free tier",
+   "A monthly spending limit, set before you create the key",
+   "Ten minutes"
+  ],
+  "tabsAria": "AI provider",
+  "rec": "recommended",
+  "steps": {
+   "openai": [
+    "Go to [[https://platform.openai.com|platform.openai.com]] and create an account. It is the developer platform, separate from ChatGPT, although you can use the same email.",
+    "Under <b>Billing</b>, add a payment method and buy a small credit, for example €5. It is prepaid balance: when it runs out, the key stops working without charging you more.",
+    "Under <b>Limits</b>, set a low monthly spending limit. That way you control the most you can spend.",
+    "Under <b>API keys</b>, click <b>Create new secret key</b>. It starts with <code>sk-</code>. Copy it right away: it is not shown again.",
+    "Paste it into the app you are going to use and choose OpenAI and an inexpensive model. It stays stored in your browser."
+   ],
+   "gemini": [
+    "Go to [[https://aistudio.google.com/apikey|aistudio.google.com]] with your Google account.",
+    "Accept the terms and click <b>Create API key</b>. Google offers a free tier with usage limits, enough to try things out.",
+    "Copy the key (it starts with <code>AIza</code>).",
+    "If you use it a lot, the free tier falls short: enable billing in Google Cloud and set a budget with an alert.",
+    "Paste it into the app and choose Google Gemini and a model."
+   ],
+   "anthropic": [
+    "Go to [[https://console.anthropic.com|console.anthropic.com]] and create an account. It is separate from the Claude subscription.",
+    "Under <b>Billing</b>, buy a small prepaid credit.",
+    "Under <b>Limits</b>, set a monthly spending limit.",
+    "Under <b>API keys</b>, click <b>Create key</b> and copy it (it starts with <code>sk-ant-</code>).",
+    "Paste it into the app and choose Anthropic Claude and a model."
+   ]
+  },
+  "go": {
+   "openai": "Open the OpenAI keys page",
+   "gemini": "Open Google AI Studio",
+   "anthropic": "Open the Anthropic console"
+  },
+  "newWin": "opens in a new window",
+  "modelsH": "Which model should you choose?",
+  "modelsP": "With the same key you can use several models, from least to most capable. You pay per <b>token</b> (a token is roughly three quarters of a word): <b>input</b> tokens are what the app sends to the model and <b>output</b> tokens are what the model writes. Between the cheapest and the most expensive model from the same provider the price can rise a hundredfold, so start with the inexpensive one and move up only if the results do not convince you.",
+  "viewAria": "Show models from",
+  "unit": "USD per million tokens, input / output",
+  "desc": {
+   "openai": [
+    "Narrow, high-volume tasks",
+    "Computer use, visual reasoning and office work",
+    "Balance of capability and cost for coding and professional work",
+    "The most demanding reasoning and coding"
+   ],
+   "anthropic": [
+    "Fast and inexpensive, for narrow, high-volume tasks",
+    "Balance of capability and cost for everyday work",
+    "Complex reasoning, coding and long tasks",
+    "The most capable publicly available model, for the most demanding work"
+   ],
+   "gemini": [
+    "The cheapest, for simple, high-volume tasks",
+    "Fast and balanced for everyday work",
+    "Complex reasoning and long documents",
+    "Google's most capable model"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Above 100,000 input tokens per request it rises to 0.50 / 2.50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Free tier available.",
+    "Free tier available. Launch price until 31 December; afterwards, 1.50 / 7.50.",
+    "No free tier.",
+    "No free tier. From 1 December; until then, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "OpenAI base rates, late 2026 (source: LISDATA).",
+   "anthropic": "Base rates published by Anthropic, checked on 18 November 2026.",
+   "gemini": "Gemini API paid-tier rates (up to 200,000 input tokens), checked on 18 November 2026."
+  },
+  "costH": "How much does it cost?",
+  "costP": "You pay for what you use. With an inexpensive model most tasks cost a few cents, and with the spending limit you will never pay more than you have decided.",
+  "safeH": "Is it safe?",
+  "safeP": "The key is stored only in your browser, never on a course server. If you use a shared computer, delete it from the app when you finish.",
+  "leakH": "If it leaks",
+  "leakP": "Do not paste it into chats, assignments or screenshots. If you think someone has seen it, revoke it on the provider's website and create a new one: the old one stops working immediately."
+ },
+ "pt": {
+  "h": "A chave de IA, explicada do zero",
+  "lead": "As apps do curso funcionam com a tua própria chave. Obtém-se em dez minutos e, com um limite de gastos, nunca pagarás mais do que decidires. A chave fica guardada apenas no teu navegador e nunca passa por um servidor do curso.",
+  "whatH": "O que é uma chave de API?",
+  "what": [
+   "É uma palavra-passe longa que uma empresa de inteligência artificial (OpenAI, Google ou Anthropic) te dá para que uma aplicação possa pedir trabalho ao modelo dela em teu nome. Pensa nela como um cartão pré-pago: a app usa-a para encomendar cada tarefa e o fornecedor cobra-te apenas o que gastares, normalmente cêntimos.",
+   "Não é o mesmo que uma subscrição do ChatGPT ou do Claude. Essas mensalidades servem para conversar no site deles e não incluem o uso por API: a chave cria-se e paga-se à parte, na plataforma de programadores de cada empresa."
+  ],
+  "needH": "O que precisas",
+  "need": [
+   "Uma conta na plataforma de programadores de um fornecedor",
+   "Um pequeno crédito pré-pago (cerca de 5 €) ou o nível gratuito do Gemini",
+   "Um limite de gastos mensal, definido antes de criar a chave",
+   "Dez minutos"
+  ],
+  "tabsAria": "Fornecedor de IA",
+  "rec": "recomendado",
+  "steps": {
+   "openai": [
+    "Entra em [[https://platform.openai.com|platform.openai.com]] e cria uma conta. É a plataforma de programadores, diferente do ChatGPT, embora possas usar o mesmo e-mail.",
+    "Em <b>Billing</b>, adiciona um método de pagamento e compra um pequeno crédito, por exemplo 5 €. É saldo pré-pago: quando acaba, deixa de funcionar sem te cobrar mais.",
+    "Em <b>Limits</b>, define um limite de gastos mensal baixo. Assim controlas o máximo que podes gastar.",
+    "Em <b>API keys</b>, carrega em <b>Create new secret key</b>. Começa por <code>sk-</code>. Copia-a nesse momento: não volta a ser mostrada.",
+    "Cola-a na app que vais usar e escolhe a OpenAI e um modelo económico. Fica guardada no teu navegador."
+   ],
+   "gemini": [
+    "Entra em [[https://aistudio.google.com/apikey|aistudio.google.com]] com a tua conta Google.",
+    "Aceita as condições e carrega em <b>Create API key</b>. A Google oferece um nível gratuito com limites de uso, suficiente para experimentar.",
+    "Copia a chave (começa por <code>AIza</code>).",
+    "Se a usares muito, o nível gratuito não chega: ativa a faturação no Google Cloud e define um orçamento com alerta.",
+    "Cola-a na app e escolhe o Google Gemini e um modelo."
+   ],
+   "anthropic": [
+    "Entra em [[https://console.anthropic.com|console.anthropic.com]] e cria uma conta. É diferente da subscrição do Claude.",
+    "Em <b>Billing</b>, compra um pequeno crédito pré-pago.",
+    "Em <b>Limits</b>, define um limite de gastos mensal.",
+    "Em <b>API keys</b>, carrega em <b>Create key</b> e copia-a (começa por <code>sk-ant-</code>).",
+    "Cola-a na app e escolhe o Anthropic Claude e um modelo."
+   ]
+  },
+  "go": {
+   "openai": "Abrir a página de chaves da OpenAI",
+   "gemini": "Abrir o Google AI Studio",
+   "anthropic": "Abrir a consola da Anthropic"
+  },
+  "newWin": "abre numa nova janela",
+  "modelsH": "Que modelo escolher?",
+  "modelsP": "Com a mesma chave podes usar vários modelos, do menos ao mais capaz. Paga-se por <b>tokens</b> (um token é mais ou menos três quartos de palavra): os de <b>entrada</b> são o que a app envia ao modelo e os de <b>saída</b>, o que o modelo escreve. Entre o mais barato e o mais caro do mesmo fornecedor o preço pode multiplicar-se por cem, por isso começa pelo económico e sobe apenas se o resultado não te convencer.",
+  "viewAria": "Ver modelos de",
+  "unit": "USD por milhão de tokens, entrada / saída",
+  "desc": {
+   "openai": [
+    "Tarefas delimitadas e de grande volume",
+    "Uso do computador, raciocínio visual e trabalho de escritório",
+    "Equilíbrio entre capacidade e custo para programação e trabalho profissional",
+    "O raciocínio e a programação mais exigentes"
+   ],
+   "anthropic": [
+    "Rápido e económico, para tarefas delimitadas e de grande volume",
+    "Equilíbrio entre capacidade e custo para o trabalho diário",
+    "Raciocínio complexo, programação e tarefas longas",
+    "O mais capaz disponível ao público, para o mais exigente"
+   ],
+   "gemini": [
+    "O mais económico, para tarefas simples e de grande volume",
+    "Rápido e equilibrado para o trabalho diário",
+    "Raciocínio complexo e documentos longos",
+    "O modelo mais capaz da Google"
+   ]
+  },
+  "notes": {
+   "openai": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "anthropic": [
+    "Acima de 100 000 tokens de entrada por pedido sobe para 0,50 / 2,50.",
+    "",
+    "",
+    ""
+   ],
+   "gemini": [
+    "Com nível gratuito.",
+    "Com nível gratuito. Preço de lançamento até 31 de dezembro; depois, 1,50 / 7,50.",
+    "Sem nível gratuito.",
+    "Sem nível gratuito. A partir de 1 de dezembro; até lá, 2 / 10."
+   ]
+  },
+  "foot": {
+   "openai": "Tarifas base da OpenAI, final de 2026 (fonte: LISDATA).",
+   "anthropic": "Tarifas base publicadas pela Anthropic, consultadas a 18 de novembro de 2026.",
+   "gemini": "Tarifas pagas da API do Gemini (até 200 000 tokens de entrada), consultadas a 18 de novembro de 2026."
+  },
+  "costH": "Quanto custa?",
+  "costP": "Paga-se pelo uso. Com um modelo económico, a maioria das tarefas custa cêntimos e, com o limite de gastos, nunca pagarás mais do que decidiste.",
+  "safeH": "É seguro?",
+  "safeP": "A chave fica guardada apenas no teu navegador, nunca num servidor do curso. Se usares um computador partilhado, apaga-a da app ao terminar.",
+  "leakH": "Se se te escapar",
+  "leakP": "Não a coles em chats, trabalhos ou capturas de ecrã. Se achares que alguém a viu, revoga-a no site do fornecedor e cria outra: a antiga deixa de funcionar de imediato."
+ }
+};
+let kxProv = "openai";
+function kxRender(lg, refocus){
+  const K = KX_T[lg] || KX_T.es, P = ["openai","gemini","anthropic"];
+  const N = { openai:"OpenAI", gemini:"Google Gemini", anthropic:"Anthropic Claude" };
+  const num = v => Number.isInteger(v) ? String(v) : v.toFixed(2).replace(".", lg === "en" ? "." : ",");
+  const sr = `<span class="kx-sr"> (${K.newWin})</span>`;
+  const lnk = s => s.replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, (m, u, t) => `<a href="${u}" target="_blank" rel="noopener">${t}${sr}</a>`);
+  const root = document.getElementById("kx"), M = KX_MODELS[kxProv];
+  root.innerHTML = (root.dataset.head === "no" ? "" : `<h2>${K.h}</h2><p class="lead">${K.lead}</p>`) + `
+  <div class="kx-what">
+    <div><h3>${K.whatH}</h3>${K.what.map(p => `<p>${p}</p>`).join("")}</div>
+    <div class="kx-need"><h3>${K.needH}</h3><ul>${K.need.map(i => `<li>${i}</li>`).join("")}</ul></div>
+  </div>
+  <div class="kx-tabs" role="tablist" aria-label="${K.tabsAria}">${P.map(p => `<button type="button" role="tab" id="kx-t-${p}" aria-controls="kx-g" aria-selected="${p === kxProv}" tabindex="${p === kxProv ? 0 : -1}" data-p="${p}">${N[p]}${p === "openai" ? ` <small>${K.rec}</small>` : ""}</button>`).join("")}</div>
+  <div class="kx-guide" role="tabpanel" id="kx-g" aria-labelledby="kx-t-${kxProv}">
+    <ol>${K.steps[kxProv].map(s => `<li><div>${lnk(s)}</div></li>`).join("")}</ol>
+    <a class="kx-go" href="${KX_GO[kxProv]}" target="_blank" rel="noopener">${K.go[kxProv]}${sr}</a>
+  </div>
+  <div class="kx-models"><h3>${K.modelsH}</h3><p>${K.modelsP}</p>
+    <div class="kx-tabs" role="group" aria-label="${K.viewAria}">${P.map(p => `<button type="button" class="kx-sel" data-p="${p}" aria-pressed="${p === kxProv}">${N[p]}</button>`).join("")}</div>
+    <div class="kx-ladder"><span class="kx-arc" aria-hidden="true"></span><span class="kx-x" aria-hidden="true">×${Math.round(M[3][2] / M[0][2])}</span>
+      <div class="kx-steps">${M.map((m, i) => `<div class="kx-step"><h4>${m[0]}</h4><p>${K.desc[kxProv][i]}</p><span class="kx-price">${num(m[1])} / ${num(m[2])}</span><small>${K.unit}</small>${K.notes[kxProv][i] ? `<em>${K.notes[kxProv][i]}</em>` : ""}</div>`).join("")}</div>
+      <p class="kx-foot">${K.foot[kxProv]}</p>
+    </div>
+  </div>
+  <div class="kx-trio">
+    <div><h3>${K.costH}</h3><p>${K.costP}</p></div>
+    <div><h3>${K.safeH}</h3><p>${K.safeP}</p></div>
+    <div><h3>${K.leakH}</h3><p>${K.leakP}</p></div>
+  </div>`;
+  const pick = (p, sel) => { kxProv = p; kxRender(lg, sel); };
+  root.querySelectorAll("[role=tab]").forEach((t, i) => {
+    t.addEventListener("click", () => pick(t.dataset.p, "#kx-t-" + t.dataset.p));
+    t.addEventListener("keydown", e => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      e.preventDefault();
+      const p = P[(i + (e.key === "ArrowRight" ? 1 : P.length - 1)) % P.length];
+      pick(p, "#kx-t-" + p);
+    });
+  });
+  root.querySelectorAll(".kx-sel").forEach(b => b.addEventListener("click", () => pick(b.dataset.p, `.kx-sel[data-p="${b.dataset.p}"]`)));
+  if (refocus) root.querySelector(refocus).focus();
+}
 
 let lang = "es";
 
@@ -572,7 +901,8 @@ function render(){
     </div>`).join("");
 
   const list = (id, arr) => { document.getElementById(id).innerHTML = arr.map(x => `<li>${esc(x)}</li>`).join(""); };
-  list("chatL", L.chat); list("apiL", L.api); list("keySteps", L.keySteps); list("keyChoose", L.keyChoose); list("priv", L.priv); list("eth", L.eth);
+  list("chatL", L.chat); list("apiL", L.api); list("priv", L.priv); list("eth", L.eth);
+  kxRender(lang);
 }
 
 function setLang(l){
