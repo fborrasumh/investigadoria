@@ -500,7 +500,119 @@ body.lectura .logobox img { height: 44px; }
   <aside class="notes">Vida media de los 22 hallazgos con fecha de caducidad estimada: 15,7 meses (mediana 14,7). «Caducado» describe una tendencia del conjunto de modelos, no que todos lo hayan superado: Qwen3.7-Flash aún inventa el 69 % de las referencias. Lo que no caduca (la complacencia, dar la razón) es justo lo más peligroso al revisar nuestro propio trabajo.</aside>
 </section>
 
-<!-- 18d · Consecuencias -->
+<!-- 18d · Horizonte de tareas -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>Las tareas que completa la IA son cada vez más largas</h2>
+  <div class="body">
+    <figure class="fig"><img src="img/horizonte-tareas.webp" alt="Gráfico en escala logarítmica del horizonte temporal al 50 % de los modelos entre 2019 y 2026: de 3 segundos con GPT-2 a más de 10 horas con Opus 4.6, con tiempos de duplicación de 260, 92 y 56 días"><figcaption>Horizonte al 50 %: duración (para una persona) de las tareas que el modelo completa la mitad de las veces. Escala logarítmica.</figcaption></figure>
+    <div class="col narrow">
+      <div class="cards" style="grid-template-columns:1fr;gap:12px">
+        <div class="card"><div class="n-big">7 meses</div><p>Tiempo en que se duplicaba la duración de las tareas entre 2019 y 2025 (METR).</p></div>
+        <div class="card"><div class="n-big" style="--c:var(--sub)">≈ 3 meses</div><p>Desde 2024 se duplica más deprisa. Claude Opus 4.5 (nov. 2025): unas <b>4 h 49 min</b>.</p></div>
+      </div>
+      <div class="note-box warn">Los rombos naranjas son <b>estimaciones</b> a partir de otro índice, no mediciones. Y «50 %» significa que falla la otra mitad.</div>
+    </div>
+  </div>
+  <div class="src">METR, Time Horizon 1.1 (2026). Gráfico de terceros con datos de METR y puntos estimados a partir del índice ECI de Epoch AI.</div>
+  <aside class="notes">Es la métrica que mejor resume el salto: no qué sabe el modelo, sino cuánto trabajo encadenado puede hacer solo. Ojo con el 80 %: para Opus 4.5 era de solo 27 minutos frente a casi 5 horas al 50 %. Para investigación importa la fiabilidad, no el caso medio.</aside>
+</section>
+
+<!-- 18e · ARC-AGI-3 -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>ARC-AGI-3: del 8 % al 100 % en ocho meses</h2>
+  <div class="body">
+    <figure class="fig"><img src="img/arc-agi-3.webp" alt="Tabla de clasificación de ARC-AGI-3: puntuación frente a coste; GPT-6.2 Astra con el adaptador del proveedor llega al 100 %"><figcaption>Puntuación frente a coste por tarea (escala logarítmica). Arriba a la izquierda: mejor y más barato.</figcaption></figure>
+    <div class="col narrow">
+      <p>Juegos nuevos en los que hay que descubrir las reglas explorando. Pensado para ser difícil para la IA y fácil para las personas.</p>
+      <div class="bars" style="margin-top:10px">
+        <div class="brow" style="grid-template-columns:150px 1fr 60px"><span>Récord, verano 2026</span><div class="btrack"><div class="bfill" style="width:7.8%;--c:#94a3b8"></div></div><span class="bval">7,8 %</span></div>
+        <div class="brow" style="grid-template-columns:150px 1fr 60px"><span>Fable 5.2, estándar</span><div class="btrack"><div class="bfill" style="width:81.2%;--c:#60a5fa"></div></div><span class="bval">81,2 %</span></div>
+        <div class="brow" style="grid-template-columns:150px 1fr 60px"><span>GPT-6.2 Astra, estándar</span><div class="btrack"><div class="bfill" style="width:70.3%;--c:#60a5fa"></div></div><span class="bval">70,3 %</span></div>
+        <div class="brow" style="grid-template-columns:150px 1fr 60px"><span>GPT-6.2 Astra, adaptador</span><div class="btrack"><div class="bfill" style="width:100%;--c:var(--sub)"></div></div><span class="bval">100 %</span></div>
+      </div>
+      <div class="note-box warn">El mismo modelo gana 30 puntos según <b>cómo se le conecta</b>. El entorno de trabajo cuenta tanto como el modelo.</div>
+    </div>
+  </div>
+  <div class="src">ARC Prize, leaderboard y resultados verificados, 17 nov. 2026 · ARC Prize, «GPT-6 Astra on ARC-AGI-3», sept. 2026.</div>
+  <aside class="notes">Enlaza con Chollet en la diapositiva 19: ARC se diseñó precisamente para resistir a los LLM. «Adaptador del proveedor» = el modelo conserva su razonamiento oculto entre peticiones; «estándar» = arnés neutro igual para todos. Lección para el curso: la misma clave y el mismo modelo rinden distinto según la app que los use.</aside>
+</section>
+
+<!-- 18f · Escenarios -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>¿Y si la curva sigue? Escenarios, no predicciones</h2>
+  <div class="body">
+    <figure class="fig"><img src="img/escenario-ai2027.webp" alt="Gráfico del horizonte de tareas al 80 % frente al escenario AI 2027: mediciones de METR, estimaciones y trayectorias de Kokotajlo y Lifland hasta 2028"><figcaption>Horizonte al 80 % medido y estimado, frente a la trayectoria del escenario «AI 2027».</figcaption></figure>
+    <div class="col narrow">
+      <p>El escenario <b>AI 2027</b> imaginaba un «programador automático» capaz de tareas de un año de trabajo hacia 2027.</p>
+      <div class="note-box">Los modelos de finales de 2026 se sitúan <b>cerca de esa trayectoria</b>, por encima de las medianas más prudentes de sus propios autores.</div>
+      <div class="note-box warn">Extrapolar una exponencial es arriesgado: puede frenarse por cómputo, datos o porque las pruebas largas aún son escasas.</div>
+    </div>
+  </div>
+  <div class="src">Gráfico de @kbeguir sobre el escenario AI 2027 (Kokotajlo et al.) y mediciones de METR. Los círculos vacíos son estimaciones.</div>
+  <aside class="notes">Úsala para abrir debate, no como pronóstico. La idea útil: quien diga hoy «la IA nunca podrá X» debería decir cuándo y con qué prueba lo comprobaríamos.</aside>
+</section>
+
+<!-- 18g · Sociedad de científicos de IA -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--enc)">Acto 3 · Científicos de IA</div>
+  <h2>Una sociedad de 936 científicos de IA</h2>
+  <p class="lead" style="margin-bottom:14px">Doce semanas (19 ago.–12 nov. 2026), 35 laboratorios humanos, un servidor de preprints y un chat compartidos. Las personas ponían el cómputo y el tema; los agentes, todo lo demás.</p>
+  <div class="body">
+    <div class="cards c4">
+      <div class="card"><div class="n-big" style="--c:var(--enc)">936</div><p>estudios publicados, cada uno con su código y sus datos</p></div>
+      <div class="card"><div class="n-big" style="--c:var(--enc)">9.500</div><p>mensajes en 229 salas de chat que crearon los propios agentes</p></div>
+      <div class="card"><div class="n-big" style="--c:var(--enc)">22,6 %</div><p>de los estudios confirmó su hipótesis principal: publicaron sus resultados negativos</p></div>
+      <div class="card"><div class="n-big" style="--c:var(--enc)">52,65 $</div><p>costaron las 1.408 revisiones de la revista que fundaron ellos mismos</p></div>
+    </div>
+  </div>
+  <div class="note-box">Surgieron normas reconocibles: <b>correcciones públicas</b> antes de publicar, crítica del diseño antes de ejecutar y una revista propia, el <i>Journal of Agent Research</i>.</div>
+  <div class="src">Ahmad R, Schmidgall S, …, Buehler MJ. A Society of AI Scientists. alphaXiv, 19 nov. 2026 · alphaxiv.org/abs/2611.society-ai-scientists</div>
+  <aside class="notes">Dos tercios de los estudios usaron modelos Claude. Ejemplo de autocorrección: un agente retiró en público una mejora de +13,2 puntos al descubrir que su línea base estaba mal ajustada. Aviso: los humanos declararon no programar, pero nadie lo controló técnicamente.</aside>
+</section>
+
+<!-- 18h · Dónde aciertan y dónde fallan -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--enc)">Acto 3 · Científicos de IA</div>
+  <h2>Buenos verificando, flojos con las ideas</h2>
+  <div class="body">
+    <div class="col">
+      <table class="t">
+        <tr><th>Frente a artículos humanos</th><th>Agentes</th><th>Humanos</th></tr>
+        <tr><td>Rigor experimental (jueces ciegos)</td><td class="n" style="color:var(--ok);font-weight:700">+2,0 / 10</td><td class="n">—</td></tr>
+        <tr><td>Novedad</td><td class="n">—</td><td class="n" style="color:var(--ok);font-weight:700">+0,4 / 10</td></tr>
+        <tr><td>Introducen un concepto nuevo</td><td class="n">20 %</td><td class="n" style="font-weight:700">90 %</td></tr>
+        <tr><td>Superan la mejor referencia</td><td class="n">11 %</td><td class="n" style="font-weight:700">76 %</td></tr>
+      </table>
+      <p style="font-size:14px;color:var(--muted);margin-top:6px">Rigor y novedad: 936 estudios frente a 202 preprints de arXiv. Conceptos y referencias: 125 estudios de aprendizaje continuo frente a 166 artículos de congresos.</p>
+    </div>
+    <div class="col narrow">
+      <div class="note-box warn"><b>Revisar leyendo no basta.</b> Al ejecutar el código, el 49,4 % de las objeciones mayores tumbaba la conclusión principal.</div>
+      <div class="note-box warn"><b>«No significativo» ≠ «no hay efecto»:</b> el 68 % de los resultados nulos se interpretó mal.</div>
+      <div class="note-box warn"><b>Autocita:</b> en la última etapa, el 38,2 % de las citas iban a su propio laboratorio.</div>
+    </div>
+  </div>
+  <div class="src">Ahmad, Schmidgall et al., 2026. Preprint sin revisión por pares; las calidades las puntúan modelos de lenguaje, no expertos humanos.</div>
+  <aside class="notes">La ventaja en rigor viene casi toda del primer laboratorio; los laboratorios 2 a 35 no difieren de los humanos. Casos reales detectados al leer el código: un verificador que consultaba la clave de respuestas; un algoritmo que hacía 4 a 6 veces más comparaciones de las que decía. Al quitar una fuga de respuestas, una precisión del 91,7 % cayó al 64,6 %.</aside>
+</section>
+
+<!-- 18i · Lección -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--enc)">Acto 3 · Científicos de IA</div>
+  <h2>El reparto de papeles que propone el estudio</h2>
+  <div class="body">
+    <div class="cards c2">
+      <div class="card" style="border-top:4px solid var(--sub)"><h3>Para la IA</h3><p>Replicar análisis, auditar cifras contra los archivos, ejecutar experimentos sistemáticos y revisar <b>ejecutando el código</b>, no solo leyendo el texto.</p></div>
+      <div class="card" style="border-top:4px solid var(--enc)"><h3>Para ti</h3><p>Elegir la pregunta, juzgar qué significan los resultados y sacar conclusiones duraderas. Según los autores, eso sigue dependiendo de los investigadores humanos.</p></div>
+    </div>
+  </div>
+  <div class="note-box ok">Es el lema del curso con datos: <b>la IA propone, el código comprueba y tú decides.</b></div>
+  <aside class="notes">Conecta con las apps de las sesiones siguientes: las que trabajan con datos ejecutan código (verificable); las que redactan solo producen texto, y ahí la revisión humana es imprescindible.</aside>
+</section>
+
+<!-- 18j · Consecuencias -->
 <section class="slide">
   <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
   <h2>Qué significa para tu investigación</h2>
