@@ -148,6 +148,12 @@ pre.code { background: #13213a; color: #dbe3f2; border-radius: 12px; padding: 16
 pre.code .v { color: #fbbf24; }
 body.lectura pre.code { font-size: 13px; }
 body.lectura .logobox img { height: 44px; }
+.cards.preds { gap: 12px; }
+.preds .card { padding: 13px 16px; }
+.preds .q { font-size: 15.5px; color: #45433e; font-style: italic; line-height: 1.35; }
+.preds .q b { font-style: normal; color: var(--text); }
+.preds .a { font-size: 15.5px; margin-top: 7px; padding-top: 7px; border-top: 1px dashed var(--border); color: var(--sub); font-weight: 600; line-height: 1.35; }
+.preds .a span { color: var(--muted); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -409,7 +415,7 @@ body.lectura .logobox img { height: 44px; }
 <section class="slide dark sep" style="--c:#34d399">
   <div class="num">3</div>
   <h2>Criterios de elección</h2>
-  <p class="lead">Capacidad, coste, ventana de contexto, ajustes del modelo, privacidad y uso ético: lo que conviene mirar antes de elegir un modelo para una tarea.</p>
+  <p class="lead">Capacidad (y lo rápido que cambia), coste, ventana de contexto, ajustes del modelo, privacidad y uso ético: lo que conviene mirar antes de elegir un modelo para una tarea.</p>
 </section>
 
 <!-- 18 · Capacidad: MIR -->
@@ -432,6 +438,81 @@ body.lectura .logobox img { height: 44px; }
   </div>
   <div class="src">Exámenes y condiciones no equivalentes: tendencia, no comparación directa. Carrasco et al., Rev Esp Educ Med 2023;1:55-69, doi:10.6018/edumed.556511 · MIR 2025 y 2026: comparativas publicadas de modelos.</div>
   <aside class="notes">En 2023 ChatGPT-3.5 habría superado la nota de corte (≈ 69 netas). En 2026 el mejor de ocho modelos acertó el 97,1 %, incluidas las preguntas con imagen.</aside>
+</section>
+
+<!-- 18a · Percepción: ciencia -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>«La IA nunca podrá…»: ciencia y razonamiento</h2>
+  <p class="lead" style="margin-bottom:14px">Expertos de primer nivel pusieron límites a la IA. Muchos duraron meses, no décadas.</p>
+  <div class="body">
+    <div class="cards c3 preds">
+      <div class="card"><p class="q"><b>Yann LeCun (2022):</b> ni «GPT-5000» aprenderá que un objeto se mueve con la mesa que empujas.</p><p class="a">GPT-3.5 lo resuelve <span>· en un año</span></p></div>
+      <div class="card"><p class="q"><b>François Chollet:</b> los LLM no llegarán al 80 % en ARC en un año.</p><p class="a">o3 ronda el 80 % <span>· 6 meses después</span></p></div>
+      <div class="card"><p class="q"><b>Subbarao Kambhampati:</b> se burla de la planificación con LLM («GPT-10, 150 % de precisión»).</p><p class="a">o1-preview: 97,8 % en sus propias pruebas <span>· 8 semanas</span></p></div>
+      <div class="card"><p class="q"><b>Yann LeCun:</b> los LLM no pueden «inventar soluciones a problemas nuevos».</p><p class="a">AlphaEvolve mejora un método de multiplicar matrices de 1969</p></div>
+      <div class="card"><p class="q"><b>Sergei Gukov:</b> los matemáticos están «seguros los próximos cinco años».</p><p class="a">OpenAI demuestra la hipótesis de <i>cuasi</i>-Riemann <span>· oct. 2026</span></p></div>
+      <div class="card"><p class="q"><b>Terence Tao:</b> Riemann necesita «algo más allá de la IA actual… tal vez 2050».</p><p class="a">Alpöge (Anthropic) presenta con Claude una prueba formal en Lean <span>· nov. 2026, pendiente de verificar</span></p></div>
+    </div>
+  </div>
+  <div class="src">Recopilación de predicciones públicas y desenlaces. Riemann: Science y Nature, 20 nov. 2026; cuasi-Riemann: Quanta Magazine, 19 oct. 2026.</div>
+  <aside class="notes">Mensaje: no es que estos expertos fueran ingenuos; son de los mejores en su campo. Es que la intuición humana extrapola mal una curva tan empinada. Ojo con Riemann: es una prueba formalizada en Lean de 17 millones de líneas que ningún humano ha leído entera; la comunidad aún la está revisando. Y la de OpenAI es la versión cuasi-Riemann, más débil.</aside>
+</section>
+
+<!-- 18b · Percepción: trabajo -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>«La IA nunca podrá…»: exámenes, trabajo y código</h2>
+  <div class="body">
+    <div class="cards c3 preds">
+      <div class="card"><p class="q"><b>Gary Marcus (2022):</b> GPT es «una moda más» con «un camino corto por delante».</p><p class="a">Sale ChatGPT: 100 millones de usuarios en 2 meses</p></div>
+      <div class="card"><p class="q"><b>Bryan Caplan:</b> ChatGPT saca una D en su examen de economía.</p><p class="a">GPT-4 saca una A <span>· dos meses después</span></p></div>
+      <div class="card"><p class="q"><b>Bill Gates:</b> no le hará caso hasta que saque un 5 en AP Biología; le da 3 años.</p><p class="a">Saca un 5 <span>· tres meses después</span></p></div>
+      <div class="card"><p class="q"><b>Michael I. Jordan:</b> un diálogo real con un ordenador «no pasará en nuestra vida».</p><p class="a">Test de Turing de 2025: los jueces eligen a la IA como humano el 73 % de las veces</p></div>
+      <div class="card"><p class="q"><b>Andrej Karpathy (2025):</b> los agentes de programación son «porquería».</p><p class="a">Programa el 80 % con agentes <span>· 3 meses después</span></p></div>
+      <div class="card"><p class="q"><b>Steven Mnuchin (2017):</b> la pérdida de empleos por IA está «a 50 o 100 años».</p><p class="a">Salesforce pasa de 9.000 a 5.000 personas en soporte <span>· 2025</span></p></div>
+    </div>
+  </div>
+  <div class="note-box warn">El error típico no es exagerar lo que hace la IA, sino <b>congelarla en la versión que probamos la última vez</b>.</div>
+  <div class="src">Recopilación de predicciones públicas y desenlaces; test de Turing: Jones y Bergen, 2025.</div>
+  <aside class="notes">Pregunta al grupo: ¿qué «la IA no sabe hacer X» habéis oído (o dicho) el último año? Apuntadlo: lo comprobaremos en la sesión con un modelo actual. Algunos, como Kai-Fu Lee o Sabine Hossenfelder, han reconocido públicamente que se equivocaron.</aside>
+</section>
+
+<!-- 18c · Caducidad de los hallazgos -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>Los hallazgos sobre la IA caducan en unos 16 meses</h2>
+  <div class="body">
+    <div class="col">
+      <p style="font-size:17px;margin-bottom:8px">50 hallazgos muy citados sobre LLM, repetidos con 20 modelos (2024-2026):</p>
+      <div class="bars">
+        <div class="brow" style="grid-template-columns:120px 1fr 56px"><span>Caducados</span><div class="btrack"><div class="bfill" style="width:44%;--c:var(--sub)"></div></div><span class="bval">44 %</span></div>
+        <div class="brow" style="grid-template-columns:120px 1fr 56px"><span>Debilitados</span><div class="btrack"><div class="bfill" style="width:34%;--c:#60a5fa"></div></div><span class="bval">34 %</span></div>
+        <div class="brow" style="grid-template-columns:120px 1fr 56px"><span>Persisten</span><div class="btrack"><div class="bfill" style="width:16%;--c:var(--warn)"></div></div><span class="bval">16 %</span></div>
+        <div class="brow" style="grid-template-columns:120px 1fr 56px"><span>Reforzados</span><div class="btrack"><div class="bfill" style="width:6%;--c:var(--bad)"></div></div><span class="bval">6 %</span></div>
+      </div>
+      <div class="note-box ok"><b>Caducan</b> los fallos de capacidad: contar letras, buscar en textos largos, <b>inventar referencias</b>.</div>
+      <div class="note-box warn"><b>Persisten</b> las preferencias: dar la razón al usuario, juzgar a favor de sí mismo, responder cuando debería abstenerse.</div>
+    </div>
+    <figure class="fig"><img src="img/caducidad-citas.webp" alt="Gráfico del porcentaje de referencias inventadas por modelo según su fecha de lanzamiento: del 59 % con GPT-3.5 en 2024 a casi 0 % en los modelos de 2026, salvo Qwen3.7-Flash"><figcaption>Referencias inventadas: del 59 % (GPT-3.5) a ≈1 % (Claude Sonnet 5.5) y 0 % (GPT-6.1 Sol)… pero Qwen3.7-Flash, 69 %.</figcaption></figure>
+  </div>
+  <div class="src">Queen O, Zou J. The shelf life of LLM findings. Stanford, 2 nov. 2026 (blog, sin revisión por pares) · Nature, 19 nov. 2026, go.nature.com/4zGDVuo.</div>
+  <aside class="notes">Vida media de los 22 hallazgos con fecha de caducidad estimada: 15,7 meses (mediana 14,7). «Caducado» describe una tendencia del conjunto de modelos, no que todos lo hayan superado: Qwen3.7-Flash aún inventa el 69 % de las referencias. Lo que no caduca (la complacencia, dar la razón) es justo lo más peligroso al revisar nuestro propio trabajo.</aside>
+</section>
+
+<!-- 18d · Consecuencias -->
+<section class="slide">
+  <div class="kicker" style="--c:var(--sub)">Acto 3 · La percepción de la evolución</div>
+  <h2>Qué significa para tu investigación</h2>
+  <div class="body">
+    <div class="cards c2">
+      <div class="card"><span class="step-n" style="--c:var(--sub)">1</span><h3>Comprueba, no recuerdes</h3><p>Ni «la IA no sabe hacer X» ni «ya lo hace todo»: prueba la tarea con el modelo actual antes de decidir.</p></div>
+      <div class="card"><span class="step-n" style="--c:var(--sub)">2</span><h3>Pon fecha y versión</h3><p>En métodos, indica el modelo exacto y cuándo lo usaste. Un resultado de hace un año puede no valer hoy.</p></div>
+      <div class="card"><span class="step-n" style="--c:var(--warn)">3</span><h3>Desconfía de su acuerdo</h3><p>La tendencia a darte la razón no caduca: pídele que busque fallos, no que confirme tu idea.</p></div>
+      <div class="card"><span class="step-n" style="--c:var(--warn)">4</span><h3>Verifica igual</h3><p>Un 1 % de referencias inventadas sigue siendo una de cada cien. Y depende del modelo que elijas.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Enlace con las apps del curso: todas permiten cambiar de modelo, así que lo que hoy falla puede funcionar en unos meses sin cambiar la app. Por eso enseñamos criterios, no un modelo concreto.</aside>
 </section>
 
 <!-- 19 · Inteligencia y coste -->
