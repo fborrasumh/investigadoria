@@ -176,6 +176,9 @@ body.lectura .logobox img { height: 44px; }
 .pdf:hover .oculto, .pdf.ver .oculto { color: var(--bad); background: #fde8e8; }
 body.lectura .mapa { grid-template-columns: 1fr; }
 body.lectura .news { grid-template-columns: 1fr !important; }
+.precios td { vertical-align: top; font-size: 16.5px; }
+.precios td span { font-size: 13.5px; color: var(--muted); }
+.precios td i { display: block; font-style: normal; font-weight: 700; font-family: 'Sora', 'Inter', system-ui, sans-serif; color: var(--warn); margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -460,23 +463,22 @@ body.lectura .news { grid-template-columns: 1fr !important; }
 <!-- 14 · Precios -->
 <section class="slide">
   <div class="kicker" style="--c:var(--warn)">Acto 2 · Grandes y pequeños</div>
-  <h2>De un modelo a otro, el precio cambia 100 veces</h2>
+  <h2>De un modelo a otro, el precio cambia 80 veces</h2>
   <div class="body">
     <div class="col">
-      <table class="t">
-        <tr><th>Modelo de OpenAI</th><th>En investigación</th><th style="text-align:right">Entrada</th><th style="text-align:right">Salida</th></tr>
-        <tr><td><b>GPT-6 Luna</b></td><td>Tareas acotadas: resumir, clasificar, extraer datos</td><td class="n">0,10 $</td><td class="n">0,50 $</td></tr>
-        <tr><td><b>GPT-6.1 Terra</b></td><td>Trabajo diario: síntesis, tablas, borradores</td><td class="n">1 $</td><td class="n">5 $</td></tr>
-        <tr><td><b>GPT-6.1 Sol</b></td><td>Trabajo exigente: memoria de un proyecto, revisión</td><td class="n">2 $</td><td class="n">10 $</td></tr>
-        <tr><td><b>GPT-6 Astra</b></td><td>El razonamiento más exigente; rara vez hace falta</td><td class="n">10 $</td><td class="n">50 $</td></tr>
+      <table class="t precios">
+        <tr><th>Escalón</th><th>OpenAI</th><th>Anthropic</th><th>Google</th></tr>
+        <tr><td><b>Económico</b><br><span>Resumir, clasificar, extraer datos</span></td><td>GPT-6 Luna<i>0,10 · 0,50</i></td><td>Claude Haiku 5.5<i>0,10 · 0,50 *</i></td><td>Gemini 3.8 Flash<i>0,75 · 3,75 **</i></td></tr>
+        <tr><td><b>Intermedio</b><br><span>Síntesis, tablas, borradores</span></td><td>GPT-6.1 Terra<i>1 · 5</i></td><td>Claude Sonnet 5.5<i>2 · 10</i></td><td>Gemini 4 Hydrogen<i>1,50 · 7,50</i></td></tr>
+        <tr><td><b>Alto</b><br><span>Memoria de un proyecto, revisión</span></td><td>GPT-6.2 Sol<i>2 · 10</i></td><td>Claude Opus 5.5<i>4 · 20</i></td><td>Gemini 4 Neon<i>3 · 15</i></td></tr>
+        <tr><td><b>Máximo</b><br><span>Razonamiento más exigente; rara vez hace falta</span></td><td>GPT-6.2 Astra<i>8 · 40</i></td><td>Claude Fable 5.2<i>8 · 40</i></td><td>Gemini 4 Carbon<i>4 · 20 ***</i></td></tr>
       </table>
-      <p style="font-size:15px;color:var(--muted);margin-top:8px">Dólares por millón de tokens. Un millón de tokens son unas 2.000 páginas.</p>
-      <div class="note-box">Para resumir, clasificar y extraer, un modelo pequeño suele bastar. Empieza por el económico y sube solo si el resultado no convence.</div>
+      <p style="font-size:14px;color:var(--muted);margin-top:8px">Dólares por millón de tokens: <b>entrada · salida</b>. Un millón de tokens son unas 2.000 páginas. * Hasta 100.000 tokens por petición; por encima, 0,50 · 2,50. ** Precio de lanzamiento hasta el 31 dic. 2026; después, 1,50 · 7,50. *** Desde el 1 dic. 2026; hasta entonces, 2 · 10.</p>
+      <div class="note-box">Para resumir, clasificar y extraer, el escalón económico suele bastar. <b>Empieza por abajo</b> y sube solo si el resultado no convence.</div>
     </div>
-    <figure class="fig" style="flex:.9"><img src="img/modelos-2026.webp" alt="Los cuatro modelos de ChatGPT en 2026, de menor a mayor capacidad: Luna, Terra, Sol y Astra"></figure>
   </div>
-  <div class="src">Tarifas estándar de la API de OpenAI, noviembre de 2026. Cambian a menudo: consulta la página de precios del proveedor.</div>
-  <aside class="notes">Las tarifas bajan con frecuencia. Lo que se mantiene es el orden de magnitud: los modelos pequeños cuestan céntimos.</aside>
+  <div class="src">Tarifas estándar de la API: OpenAI, Anthropic y Google, consultadas el 25 nov. 2026. Cambian a menudo; el procesamiento por lotes cuesta la mitad.</div>
+  <aside class="notes">El mismo escalón cuesta parecido en los tres proveedores; la diferencia grande está entre escalones (de 0,10 a 8 dólares de entrada: 80 veces). En la práctica usamos OpenAI, pero las apps aceptan las tres claves. Luna y Terra ya no figuran en la tabla estándar de OpenAI, solo en la de Flex (a mitad de precio); aquí se muestra su tarifa estándar equivalente.</aside>
 </section>
 
 <!-- 15 · Calculadora -->
@@ -498,7 +500,7 @@ body.lectura .news { grid-template-columns: 1fr !important; }
     </div>
   </div>
   <div class="src">Estimación ilustrativa con 1 palabra ≈ 1,3 tokens y las tarifas de la diapositiva anterior. El coste real de cada app puede variar.</div>
-  <aside class="notes">Prueba la mejora de un proyecto con GPT-6 Astra: incluso el caso más caro cuesta unos pocos dólares. Con el modelo pequeño, casi todo cuesta céntimos.</aside>
+  <aside class="notes">Prueba la mejora de un proyecto con GPT-6.2 Astra: incluso el caso más caro cuesta unos pocos dólares. Con el modelo pequeño, casi todo cuesta céntimos.</aside>
 </section>
 
 <!-- 16 · Gasto real -->
@@ -1196,7 +1198,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 
   /* calculadora de coste: tokens = palabras × 1,3 */
   const TOK = 1.3;
-  const MOD = [['GPT-6 Luna', 0.10, 0.50], ['GPT-6.1 Terra', 1, 5], ['GPT-6.1 Sol', 2, 10], ['GPT-6 Astra', 10, 50]];
+  const MOD = [['GPT-6 Luna', 0.10, 0.50], ['Claude Haiku 5.5', 0.10, 0.50], ['GPT-6.1 Terra', 1, 5], ['Gemini 4 Neon', 3, 15], ['GPT-6.2 Sol', 2, 10], ['Claude Opus 5.5', 4, 20], ['GPT-6.2 Astra', 8, 40]];
   const TAR = [
     {n: 'Resumir un artículo de 20 páginas', inW: 8300, outW: 400, veces: 1, d: 'Artículo de unas 8.000 palabras más instrucciones; resumen estructurado de unas 400 palabras.'},
     {n: 'Cribar 200 resúmenes por título y resumen', inW: 550, outW: 50, veces: 200, d: 'Cada resumen (unas 250 palabras) con los criterios de inclusión (unas 300); decisión razonada de unas 50 palabras. Con dos revisores, el doble.'},
