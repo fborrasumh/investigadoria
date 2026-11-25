@@ -500,7 +500,7 @@ body.lectura .news { grid-template-columns: 1fr !important; }
     </div>
   </div>
   <div class="src">Estimación ilustrativa con 1 palabra ≈ 1,3 tokens y las tarifas de la diapositiva anterior. El coste real de cada app puede variar.</div>
-  <aside class="notes">Prueba la mejora de un proyecto con GPT-6.2 Astra: incluso el caso más caro cuesta unos pocos dólares. Con el modelo pequeño, casi todo cuesta céntimos.</aside>
+  <aside class="notes">El caso más caro, mejorar un proyecto en 10 ciclos con GPT-6.2 Astra, cuesta unos 5,51 $: supera el tope de 5 $ y la calculadora lo avisa. El mismo trabajo con GPT-6 Luna o Claude Haiku 5.5 cuesta unos 7 céntimos. Resumir un artículo con un modelo económico, 0,13 céntimos.</aside>
 </section>
 
 <!-- 16 · Gasto real -->
@@ -1291,7 +1291,7 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
 
   /* calculadora de coste: tokens = palabras × 1,3 */
   const TOK = 1.3;
-  const MOD = [['GPT-6 Luna', 0.10, 0.50], ['Claude Haiku 5.5', 0.10, 0.50], ['GPT-6.1 Terra', 1, 5], ['Gemini 4 Neon', 3, 15], ['GPT-6.2 Sol', 2, 10], ['Claude Opus 5.5', 4, 20], ['GPT-6.2 Astra', 8, 40]];
+  const MOD = [['GPT-6 Luna', 0.10, 0.50], ['Claude Haiku 5.5', 0.10, 0.50], ['GPT-6.1 Terra', 1, 5], ['GPT-6.2 Sol', 2, 10], ['Gemini 4 Neon', 3, 15], ['Claude Opus 5.5', 4, 20], ['GPT-6.2 Astra', 8, 40]];
   const TAR = [
     {n: 'Resumir un artículo de 20 páginas', inW: 8300, outW: 400, veces: 1, d: 'Artículo de unas 8.000 palabras más instrucciones; resumen estructurado de unas 400 palabras.'},
     {n: 'Cribar 200 resúmenes por título y resumen', inW: 550, outW: 50, veces: 200, d: 'Cada resumen (unas 250 palabras) con los criterios de inclusión (unas 300); decisión razonada de unas 50 palabras. Con dos revisores, el doble.'},
@@ -1301,13 +1301,14 @@ PAPER: <span class="v">{{paper_text}}</span></pre>
   ];
   const ct = document.getElementById('cTarea'), cm = document.getElementById('cModelo');
   ct.innerHTML = TAR.map((t, k) => `<option value="${k}">${t.n}</option>`).join('');
-  cm.innerHTML = MOD.map((m, k) => `<option value="${k}">${m[0]} (${String(m[1]).replace('.', ',')} $ / ${String(m[2]).replace('.', ',')} $)</option>`).join('');
+  const tar = v => (v < 1 ? v.toFixed(2) : String(v)).replace('.', ',');
+  cm.innerHTML = MOD.map((m, k) => `<option value="${k}">${m[0]} (${tar(m[1])} $ / ${tar(m[2])} $)</option>`).join('');
   const fmt = (v, d) => v.toFixed(d).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   function calc() {
     const t = TAR[ct.value], m = MOD[cm.value];
     const tin = t.inW * TOK * t.veces, tout = t.outW * TOK * t.veces;
     const usd = tin / 1e6 * m[1] + tout / 1e6 * m[2];
-    document.getElementById('cRes').textContent = usd < 0.01 ? fmt(usd * 100, 2) + ' céntimos' : fmt(usd, usd < 1 ? 3 : 2) + ' $';
+    document.getElementById('cRes').textContent = usd < 0.01 ? fmt(usd * 100, 2) + ' céntimos' : usd < 1 ? fmt(usd * 100, 1) + ' céntimos' : fmt(usd, 2) + ' $';
     document.getElementById('cRes2').textContent = `≈ ${fmt(Math.round(tin), 0)} tokens de entrada y ${fmt(Math.round(tout), 0)} de salida`;
     document.getElementById('cSupuesto').textContent = 'Supuesto: ' + t.d;
     const veces = Math.floor(5 / usd);
